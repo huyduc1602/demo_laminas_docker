@@ -1,0 +1,7 @@
+2024-04-02 10:27:00.156731|n|48096640|mroonga 7.07 started.
+2024-04-02 10:27:00.156929|n|48096640|log level is 'NOTICE'
+2024-04-02 10:27:00.160736|n|48096640|default tokenizer for fulltext index is changed: <TokenBigram> -> <TokenMecab>
+2024-04-02 10:28:18.424717|n|4a350880|mroonga 7.07 deinit
+2024-04-02 10:28:18.425295|n|4a350880|grn_fin (0)
+2024-04-02 10:28:19.827687|n|085c2880|mroonga 7.07 started.
+2024-04-02 10:28:19.827903|n|085c2880|log level is 'NOTICE'

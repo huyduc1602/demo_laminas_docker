@@ -1,0 +1,21 @@
+version: '3.1'
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    
+    ports:
+      - "80:80"
+      - "443:443"
+      
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./data/conf.d:/etc/nginx/conf.d
+      - ./data/certs:/etc/nginx/certs:ro
+      - ./data/dhparam:/etc/nginx/dhparam
+      - ./data/vhost.d:/etc/nginx/vhost.d
+      - ./data/html:/usr/share/nginx/html
+      
+    restart: unless-stopped
+    network_mode: bridge
+    

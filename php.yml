@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  php_apache_debian:
+    container_name: php_apache_debian
+    
+    image: php_apache
+    
+    ports:
+      - "80"
+    
+    working_dir: /var/www/projects
+    
+    volumes:
+      - "./httpd:/etc/httpd"
+      - "./supervisor:/etc/supervisor/conf.d/"
+      - "./projects:/var/www/"
+      
+    environment:
+      - VIRTUAL_HOST=*.laminas.local
+      - VIRTUAL_PROTO=http
+      - HTTPS_METHOD=noredirect
+      - VIRTUAL_PORT=80
+      - CERT_NAME=laminas.local
+      
+    restart: unless-stopped
+    network_mode: bridge

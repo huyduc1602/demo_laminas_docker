@@ -1,0 +1,58 @@
+FROM php:8.2.12-apache
+
+RUN rm -f /etc/localtime \
+    && ln -s /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime
+
+RUN apt-get update
+
+RUN rm /etc/apt/preferences.d/no-debian-php
+
+RUN apt-get install -y procps libc-ares-dev libmcrypt-dev zlib1g-dev \
+    libjpeg-dev libwebp-dev php-dev libtidy-dev libonig-dev libicu-dev libpng-dev \
+    librdkafka-dev librdkafka1 ca-certificates zip unzip wget nano supervisor
+
+RUN docker-php-ext-install bcmath tidy pdo_mysql gd mbstring
+
+RUN docker-php-ext-configure intl \
+    && docker-php-ext-install intl
+
+RUN pecl install rdkafka redis igbinary \
+    && docker-php-ext-enable igbinary rdkafka
+
+RUN pecl install mcrypt \
+    && docker-php-ext-enable mcrypt
+
+# RUN docker-php-ext-configure json \
+# && docker-php-ext-install json
+
+RUN docker-php-ext-install opcache
+
+RUN apt-get install -y php-json php-horde-xml-element \
+    && docker-php-ext-enable redis
+
+RUN apt-get install -y php-imagick libmagickwand-dev libmagickcore-dev \
+    && pecl install imagick \
+    && echo "extension=imagick.so" > /usr/local/etc/php/conf.d/docker-php-ext-imagick.ini
+
+RUN docker-php-ext-configure gd --with-jpeg --with-webp && docker-php-ext-install gd
+
+RUN pecl install --configureoptions 'enable-sockets="no" enable-openssl="yes" enable-http2="yes" enable-mysqlnd="yes" enable-swoole-json="yes" enable-swoole-curl="yes" enable-cares="yes"' openswoole \
+    && docker-php-ext-enable openswoole
+
+# Clearn up
+RUN apt-get remove -y libwebp-dev libjpeg-dev php-dev libtidy-dev zlib1g-dev libonig-dev libicu-dev libpng-dev librdkafka-dev libmcrypt-dev libmagickwand-dev libmagickcore-dev -y
+
+RUN a2enmod rewrite remoteip
+
+RUN mv /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini \
+    && sed -i "s/post_max_size = 8M/post_max_size = 60M/g" /usr/local/etc/php/php.ini \
+    && sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 50M/g" /usr/local/etc/php/php.ini \
+    && sed -i "s/memory_limit = 128M/memory_limit = 256M/g" /usr/local/etc/php/php.ini \
+    && sed -i "s/;max_input_vars = 1000/max_input_vars = 3000/g" /usr/local/etc/php/php.ini \
+    && sed -i "s/;date.timezone =/date.timezone = Asia\/Ho_Chi_Minh/g" /usr/local/etc/php/php.ini
+
+RUN echo "IncludeOptional /etc/httpd/site-enable/*.conf" >> /etc/apache2/apache2.conf
+
+WORKDIR /var/www
+
+CMD ["/usr/bin/supervisord", "-n"]

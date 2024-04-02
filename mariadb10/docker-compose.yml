@@ -1,0 +1,15 @@
+version: '3.1'
+services:
+  mariadb_server:
+    container_name: mariadb
+    image: mariadb
+    user: root
+    volumes:
+      - "./data:/var/lib/mysql"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - "3306:3306"
+    restart: unless-stopped
+    network_mode: bridge
+    command: "--character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --default_time_zone=+07:00"
