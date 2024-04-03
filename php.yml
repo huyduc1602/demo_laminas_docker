@@ -8,15 +8,15 @@ services:
     ports:
       - "80"
     
-    working_dir: /var/www/projects
+    working_dir: /var/www/projects/
     
     volumes:
       - "./httpd:/etc/httpd"
       - "./supervisor:/etc/supervisor/conf.d/"
-      - "./projects:/var/www/"
+      - "./projects:/var/www/projects/"
       
     environment:
-      - VIRTUAL_HOST=*.laminas.local
+      - VIRTUAL_HOST=*.laminas.local,laminas.local
       - VIRTUAL_PROTO=http
       - HTTPS_METHOD=noredirect
       - VIRTUAL_PORT=80
