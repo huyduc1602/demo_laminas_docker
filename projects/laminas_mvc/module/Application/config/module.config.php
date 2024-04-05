@@ -8,6 +8,10 @@ use Application\Controller;
 use Laminas\Router\Http\Literal;
 use Laminas\Router\Http\Segment;
 use Laminas\ServiceManager\Factory\InvokableFactory;
+use Laminas\ServiceManager\AbstractFactory\ReflectionBasedAbstractFactory;
+use Album\Model\AlbumTableFactory;
+use Album\Model\AlbumTable;
+
 return [
     'router' => [
         'routes' => [
@@ -41,6 +45,20 @@ return [
                     ],
                 ],
             ],
+           'album' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route' => '/album[/:action[/:id]]',
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\AlbumController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
             'application' => [
                 'type'    => Segment::class,
                 'options' => [
@@ -57,6 +75,7 @@ return [
         'factories' => [
             Controller\IndexController::class => InvokableFactory::class,
             Controller\HelloController::class => InvokableFactory::class,
+            Controller\AlbumController::class => ReflectionBasedAbstractFactory::class,
         ],
     ],
     'view_manager' => [
@@ -70,9 +89,18 @@ return [
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
+            'application/album/index' => __DIR__ . '/../../Album/view/album/album/index.phtml',
+            'application/album/add' => __DIR__ . '/../../Album/view/album/album/add.phtml',
+            'application/album/edit' => __DIR__ . '/../../Album/view/album/album/edit.phtml',
         ],
         'template_path_stack' => [
             __DIR__ . '/../view',
+            'album' => __DIR__ . '/../../Album/view',
+        ],
+    ],
+    'service_manager' => [
+        'factories' => [
+            AlbumTable::class => AlbumTableFactory::class,
         ],
     ],
 ];

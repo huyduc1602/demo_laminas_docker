@@ -1,0 +1,153 @@
+<?php
+$breadcrumb = $this->partial('application/layout/breadcrumb.phtml', [
+    'list' => [
+        ['title' => $this->translate('Home'), 'url' => $this->zfUrl('home')],
+        ['title' => $this->translate('Blog'), 'url' => $this->zfUrl('blog')],
+        ['title' => $article->news_title]
+    ]
+]);
+$this->headTitle($article->news_title);
+$serverUrl = $this->serverurl();
+
+$this->viewHook()->attachEvt('layoutStruct',
+    function (Laminas\EventManager\Event $evt) use ($breadcrumb, $article){
+    $params = $evt->getParams();
+    $arrayStructs = &$params['layoutStruct'];
+    $arrayStructs_replace = [
+        'header' => [
+            'menuTop' => true,
+            'banner'  => false,
+        ],
+        'headMeta'=> [
+            'description' => $article->news_seo_meta_discription,
+            'keyword'     => $article->news_seo_meta_keyword,
+            'url'         => $this->zfUrl('blog-detail', ['id' => $article->news_code, 'title' => $article->news_title_path_url], ['force_canonical' => true]),
+        ],
+        'body' => [
+            'breadcrumb' => $breadcrumb,
+            'rightContent' => [
+                'data' => ['ncate_id' => $article->news_ncate_id],
+            ],
+            'bodyClass' => ['loop1'=> 'container-fluid custom-size', 'loop2' => 'row custom-top']
+        ]
+    ];
+    if($article->news_img){
+        $arrayStructs_replace['headMeta']['img'] = [
+            'url'   => \Models\Entities\News::getOrginalImg($article->news_img, $this->serverurl()),
+            'width' => 800,
+            'height'=> 600,
+            'type'  => substr(strrchr($article->news_img, "."), 1)
+        ];
+    }
+    $arrayStructs = array_replace_recursive($arrayStructs, $arrayStructs_replace);
+});
+
+$this->headStyleAction('
+    .main-title{margin-top: 17px;}
+');
+
+$serverUrl = \Models\Utilities\UserUpload::getSubDomainLink($this->serverurl(), 'img');
+$img_origin = $article->news_img;
+$img = \Models\Entities\News::getOrginalImg($article->news_img);
+
+?>
+
+    <div class="col-12 col-lg-9">
+      <div class="blogs__content mb-4">
+        <?php if(empty($img_origin) == false):?>
+        <img src="<?php echo $img;?>" class="main-img">
+        <?php endif;?>
+        
+        <h2 class="main-title"><?php echo $article->news_title; ?></h2>
+        <div class="w-100">
+          <div class="arti-share justify-content-start">
+          	<?php 
+                $shareText = urlencode($this->translate('Skill share from Shinwa3.com'));
+                $onclick = "javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;";
+                $linkNews = urlencode($this->serverurl($this->zfUrl('blog-detail', ['id'=> $article->news_code, 'title' => $artitle->news_title_path_url])));
+                
+                $shareFB =  "https://www.facebook.com/sharer.php?t={$shareText}&u={$linkNews}";
+                $shareTwitter = "https://twitter.com/intent/tweet?text={$shareText}&url={$linkNews}";             
+                $shareLine = "https://social-plugins.line.me/lineit/share?text={$shareText}&url={$linkNews}";
+                $shareGG = "https://plus.google.com/share?text={$shareText}&url={$linkNews}";
+            ?>
+            
+            <a href="<?php echo $shareFB; ?>" onclick="<?php echo $onclick; ?>" class="share-btn -fb" title="<?php echo $this->translate('Skill share to Facebook') ?>">
+                <i class="fa fa-facebook" aria-hidden="true"></i> <span>Facebook</span>
+            </a>
+            <a href="<?php echo $shareTwitter; ?>" onclick="<?php echo $onclick; ?>" class="share-btn -tw">
+                <i class="fa fa-twitter" aria-hidden="true"></i> <span>Twitter</span>
+            </a>
+            <a href="<?php echo $shareLine; ?>" onclick="<?php echo $onclick; ?>" class="share-btn -ln">
+                <img src="/<?= APPLICATION_SKIN_NAME ?? '' ?>/img/line-icon.png"> <span>Line</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="content">
+          	<?php echo $article->news_content; ?>
+        </div>
+
+      </div>
+	<?php 
+	  if(empty(trim($article->news_tags)) == false): 
+	  $tags = explode(',', $article->news_tags);
+	?>
+	<div class="row mt-5">
+		<div class="col-12">
+            <!-- TAGS -->
+			<div class="tags__box">
+				<div class="tags__box__inner">
+              		<div class="tags__title"><p><i class="fa fa-tags mr-1"></i>人気のタグ一覧</p></div>
+              		<div class="tags__content">
+                    	<ul>
+                        	<?php foreach ($tags as $val):
+                        	$link = $this->zfUrl('blog', [], ['query' => ['f' => $val]]);
+                        	?>
+                          	<li><a href="<?php echo $link; ?>"><?php echo $val; ?></a></li>
+                          	<?php endforeach;?>
+                    	</ul>
+              		</div>
+            	</div>
+                <div class="tags__box__expand">
+					<a href="#"><i class="fa fa-angle-down"></i></a>
+                </div>
+          	</div>
+        </div>
+	</div>
+	<?php endif;?>
+	
+	<?php if(empty($relation_articles) == false):?>
+    <div class="related__post">
+        <div class="row">
+            <div class="col-12">
+            	<h3 class="related__title">関連記事</h3>
+            </div>
+        </div>
+        <div class="row no-gutters">
+            <div class="blog__wrapper mt-0">
+                <ul>
+                  	<?php foreach($relation_articles as $blog):
+                  	$date = date('Y年m月d日', $blog['news_created_at']);
+                  	$cate = empty($cates[$blog['news_ncate_id']]) ? [] : $cates[$blog['news_ncate_id']];
+                  	$title = $blog['news_title'];
+                  	$link = $this->zfUrl('blog-detail', ['id' => $blog['news_code'], 'title' => $blog['news_title_path_url']]);
+                  	?>
+                    <li class="blog__content__item">
+                        <time class="blog__content__date"><?php echo $date; ?></time>
+                        <div class="blog__content__category">
+                        	<span style="color: <?php echo $cate['ncate_txt_color']?>; background-color: <?php echo $cate['ncate_bg_color']?>;"><?php echo $cate['ncate_name']?></span>
+                    	</div>
+                        <div class="blog__content__title">
+                        	<a href="<?php echo $link; ?>"><span><?php echo $title; ?></span></a>
+                        </div>
+                    </li>
+                    <?php endforeach;?>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <?php endif;?>
+</div>
+
+

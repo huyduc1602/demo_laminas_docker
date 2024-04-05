@@ -53,6 +53,14 @@ RUN mv /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini \
 
 RUN echo "IncludeOptional /etc/httpd/site-enable/*.conf" >> /etc/apache2/apache2.conf
 
-WORKDIR /var/www
+## Install Composer
+RUN apt-get install -y curl && \
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-CMD ["/usr/bin/supervisord", "-n"]
+COPY ./projects/laminas_mvc_core /var/www/lib_php/laminas_mvc_core
+COPY ./projects/laminas_swoole_php82 /var/www/lib_php/laminas_swoole_php82
+COPY ./projects/lib_minify /var/www/lib_php/lib_minify
+
+WORKDIR /var/www/projects
+
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf", "-n"]

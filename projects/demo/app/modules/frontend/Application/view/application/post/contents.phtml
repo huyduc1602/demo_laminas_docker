@@ -1,0 +1,58 @@
+<?php
+$this->viewHook()->attachEvt('layoutStruct', 
+    function (Laminas\EventManager\Event $evt) use( $postEle ){
+    $params = $evt->getParams();
+    $arrayStructs = &$params['layoutStruct'];
+    $arrayStructs = array_replace_recursive($arrayStructs, [
+        'headMeta' => [
+            'description' => $postEle->p_description,
+            'keyword' => $postEle->p_keyword,
+            'url' => $this->zfUrl()
+        ],
+        'header' => [
+            'menuTop' => true,
+            'banner'  => false,
+            'mainMenu'=> false,
+        ],
+        'body' => [
+            'leftContent' => false,
+            'bodyAttrs' => ['class' => 'd-flex flex-column-reverse flex-sm-column-reverse flex-md-column-reverse flex-lg-row']
+        ]
+    ]);
+});
+$this->headTitle($postEle->p_title);
+?><div class="card-body"><?php 
+echo str_replace([
+    '{{domain}}', '{{base_url}}'
+], [
+    $this->serverurl(false), '/main/contents'
+], $postEle->p_content);
+?></div><?php 
+$resourcs = $postEle->p_resource;
+if ( $resourcs ){
+    $postAssest = [];$pubRes = $this->zfResource();
+    $inlines = (array)$resourcs['inlines']; unset($resourcs['inlines']);
+    
+    foreach ( $resourcs as $type => $rss ){
+        
+        if( $rss ){
+            $baseNo = 101;
+            foreach ( $rss as $rs ){
+                $postAssest[$type][$baseNo++] = $pubRes->files( 
+                    'custom/' . trim($rs), $type, false
+                );
+            }
+        }
+    }
+    
+    $this->lazyAsset()->addItems($postAssest);
+    
+    if ($inlines && $inlines['css']){
+        $this->headStyleAction($inlines['css']);
+    }
+    if ($inlines && $inlines['js']){
+        $this->headScriptAction($inlines['js']);
+    }
+    unset($inlines, $pubRes, $postAssest, $resourcs);
+}
+?>

@@ -1,0 +1,31 @@
+<?php 
+$urlDefault = $this->serverurl();
+$pubRes = $this->zfResource();$cstAsset = $this->lazyAsset()->getItems();
+echo $this->doctype('HTML5');
+?>
+<html lang="<?php echo APPLICATION_LANGUAGE?>">
+    <head>
+        <?php 
+        /* echo $this->headmeta()
+        ->setHttpEquiv('Content-Type', 'text/html; charset=utf-8')
+        ->setHttpEquiv('X-UA-Compatible', 'IE=EDGE')
+        ->appendName('viewport', 'height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0, user-scalable=no')
+        ->appendName('copyright', 'Shinwa, Inc')
+        ->appendName('author', 'Shinwa, Inc'); */
+        ?>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+        <meta http-equiv="Content-Language" content="<?php echo APPLICATION_LOCALE ?>">
+        <meta name="viewport" content="height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+        <meta name="copyright" content="Shinwa, Inc.">
+        <meta name="author" content="Shinwa, Inc.">
+        <title><?php echo  $this->headTitle('Files not found.')->setSeparator(' - ')
+        ->setAutoEscape(false)->renderTitle(); ?></title>
+        <link rel="manifest" href="<?php echo $urlDefault ?>/manifest.json">
+        <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="<?php 
+        echo $urlDefault?>/assets/images/index.ico?v=1"/>
+
+    </head>
+    <body><?php echo $this->content; ?></body>
+</html>

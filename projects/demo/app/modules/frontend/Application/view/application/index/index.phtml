@@ -1,0 +1,32 @@
+<?php
+$this->viewHook()->attachEvt('layoutStruct',
+    function (Laminas\EventManager\Event $evt) use($constant) {
+        $params = $evt->getParams();
+        $arrayStructs = &$params['layoutStruct'];
+        $arrayStructs = array_replace_recursive($arrayStructs, [
+            'headMeta' => [
+                'description' => $constant->constant_receiver ?? '',
+                'keyword' => $constant->constant_sender ?? '',
+            ],
+            'header' => [
+                'menuTop' => true,
+                'banner' => false,
+                'mainMenu' => false,
+            ],
+            'body' => [
+                'rightContent' => false
+            ]
+        ]);
+    });
+
+$this->headTitle($constant->constant_title ?? 'Demo home');
+
+$pubRes = $this->zfResource();
+$this->lazyAsset()->addItems([
+    'css' => [
+        71 => $pubRes->files('/custom/shinwa.css', 'css', false),
+    ]
+]);
+
+
+echo 'success';

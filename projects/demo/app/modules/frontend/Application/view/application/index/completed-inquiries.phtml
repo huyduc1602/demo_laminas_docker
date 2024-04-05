@@ -1,0 +1,47 @@
+<?php
+$this->headTitle('送信完了');
+$this->viewHook()->attachEvt('layoutStruct', function (Laminas\EventManager\Event $evt) {
+    $params = $evt->getParams();
+    $arrayStructs = &$params['layoutStruct'];
+    $arrayStructs = array_replace_recursive($arrayStructs, [
+        'header' => [
+            'menuTop' => true,
+            'banner' => false,
+            'mainMenu' => false
+        ],
+        'body' => [
+            'banner' => false,
+            'bodyClass' => [
+                'loop1' => 'container',
+                'loop2' => 'row'
+            ]
+        ],
+        'headMeta'=> [
+            'description' => 'お問い合わせ内容の完了ページです。',
+        ]
+    ]);
+});
+
+$serverUrl = \Models\Utilities\UserUpload::getSubDomainLink($this->serverurl(), 'img');
+?>
+
+<div class="col-12">
+		<div class="shadow wrap__margin bg-white p-5">
+			<h1 class="complete-title mb-3">
+				<span class="">送信完了</span>
+			</h1>
+
+			<div class="complete-text">
+				<p>この度は、弊社へお問い合わせをいただきまして誠に有難うございました。</p>
+
+				<p>弊社より２営業日以内にご連絡させて頂きますので、<br>
+                    今暫くお待ちくださいますようお願い申し上げます。</p>
+
+				<p>もしご連絡がなければ、大変お手数とは存じますが、<br>
+                    再度お問い合わせいただきたく存じます。</p>
+				<p>それでは今後とも弊社、株式会社ジルネスタを宜しくお願い申し上げます。</p>
+			</div>
+
+			<a href="<?php echo $this->zfUrl('home'); ?>" class="mt-4 call-back-btn">トップページへ戻る</a>
+		</div>
+</div>

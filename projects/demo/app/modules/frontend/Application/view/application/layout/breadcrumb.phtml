@@ -1,0 +1,15 @@
+<div class="container-fluid custom-size">
+	<div class="custom-top">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+            	<?php 
+                	$last = array_pop($list);
+                	foreach ($list as $item):
+                ?>
+              	<li class="breadcrumb-item"><a href="<?php echo $item['url'];?>"><?php echo $item['title']; ?></a></li>
+              	<?php endforeach;?>
+              <li class="breadcrumb-item active" aria-current="page"><?php echo $last['title'];?></li>
+            </ol>
+        </nav>
+	</div>
+</div>

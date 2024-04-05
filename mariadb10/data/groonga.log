@@ -9,3 +9,32 @@
 2024-04-03 08:51:31.376417|n|4da98880|log level is 'NOTICE'
 2024-04-03 09:39:30.190848|n|696cc880|mroonga 7.07 started.
 2024-04-03 09:39:30.191108|n|696cc880|log level is 'NOTICE'
+2024-04-04 08:46:35.999691|n|20763880|mroonga 7.07 started.
+2024-04-04 08:46:35.999999|n|20763880|log level is 'NOTICE'
+2024-04-04 10:19:40.332977|n|f431d640|spec:2:update:Object:32(type):8
+2024-04-04 10:19:40.337503|n|f431d640|spec:3:update:Bool:32(type):1
+2024-04-04 10:19:40.337629|n|f431d640|spec:4:update:Int8:32(type):1
+2024-04-04 10:19:40.337740|n|f431d640|spec:5:update:UInt8:32(type):1
+2024-04-04 10:19:40.337833|n|f431d640|spec:6:update:Int16:32(type):2
+2024-04-04 10:19:40.337919|n|f431d640|spec:7:update:UInt16:32(type):2
+2024-04-04 10:19:40.338004|n|f431d640|spec:8:update:Int32:32(type):4
+2024-04-04 10:19:40.338087|n|f431d640|spec:9:update:UInt32:32(type):4
+2024-04-04 10:19:40.338170|n|f431d640|spec:10:update:Int64:32(type):8
+2024-04-04 10:19:40.338255|n|f431d640|spec:11:update:UInt64:32(type):8
+2024-04-04 10:19:40.338342|n|f431d640|spec:12:update:Float:32(type):8
+2024-04-04 10:19:40.338428|n|f431d640|spec:13:update:Time:32(type):8
+2024-04-04 10:19:40.338533|n|f431d640|spec:14:update:ShortText:32(type):4096
+2024-04-04 10:19:40.338622|n|f431d640|spec:15:update:Text:32(type):65536
+2024-04-04 10:19:40.338707|n|f431d640|spec:16:update:LongText:32(type):2147483648
+2024-04-04 10:19:40.338793|n|f431d640|spec:17:update:TokyoGeoPoint:32(type):8
+2024-04-04 10:19:40.338879|n|f431d640|spec:18:update:WGS84GeoPoint:32(type):8
+2024-04-04 10:19:40.350209|n|f431d640|DDL:256:table_create mroonga_operations
+2024-04-04 10:19:40.352762|n|f431d640|spec:256:update:mroonga_operations:51(table:no_key):0
+2024-04-04 10:19:40.352908|n|f431d640|DDL:257:column_create mroonga_operations type
+2024-04-04 10:19:40.359139|n|f431d640|spec:257:update:mroonga_operations.type:65(column:var_size):14(ShortText)
+2024-04-04 10:19:40.359757|n|f431d640|DDL:258:column_create mroonga_operations table
+2024-04-04 10:19:40.366058|n|f431d640|spec:258:update:mroonga_operations.table:65(column:var_size):14(ShortText)
+2024-04-04 10:19:40.366168|n|f431d640|DDL:259:column_create mroonga_operations record
+2024-04-04 10:19:40.368366|n|f431d640|spec:259:update:mroonga_operations.record:64(column:fix_size):9(UInt32)
+2024-04-05 08:58:57.443421|n|45f0e880|mroonga 7.07 started.
+2024-04-05 08:58:57.443917|n|45f0e880|log level is 'NOTICE'

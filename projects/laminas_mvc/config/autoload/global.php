@@ -12,17 +12,22 @@
  * file.
  */
 
+use Laminas\Db\Adapter\AdapterInterface;
+use Laminas\Db\Adapter\Adapter;
+
 return [
-   'db' => [
-        'adapters' => [
-            'Application\Db\WriteAdapter' => [
-                'driver' => 'Pdo',
-                'dsn'    => 'mysql:dbname=application;host=laminas.local;charset=utf8',
-            ],
-            'Application\Db\ReadOnlyAdapter' => [
-                'driver' => 'Pdo',
-                'dsn'    => 'mysql:dbname=application;host=laminas.local;charset=utf8',
-            ],
+    'service_manager' => [
+        'factories' => [
+            AdapterInterface::class => function($container) {
+                $config = $container->get('config');
+                return new Adapter($config['db']);
+            },
         ],
+    ],
+    'db' => [
+        'driver' => 'Pdo',
+        'dsn'    => 'mysql:dbname=laminas_mvc;host=172.17.0.1',
+        'username' => 'root',
+        'password' => 'root',
     ],
 ];

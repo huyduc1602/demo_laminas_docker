@@ -1,0 +1,59 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+use Laminas\Cli\ApplicationProvisioner;
+use Laminas\Cli\ApplicationFactory;
+use Laminas\Cli\ContainerResolver;
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Console\Output\ConsoleOutput;
+use \OpenSwoole\Util as Util;
+
+require '/var/www/projects/laminas_swoole_php82/vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
+require './error_handle.php';
+
+$projectRoot = __DIR__;
+if (!function_exists('swoole_set_process_name')) {
+    function swoole_set_process_name($name) {
+        Util::setProcessName($name);
+    }
+}
+
+// Set the main application directory as the current working directory
+chdir($projectRoot);
+
+$app = (new ApplicationFactory())();
+$definition = $app->getDefinition();
+$output = new ConsoleOutput();
+$containerNotFoundMessage = '';
+$input = new ArgvInput();
+
+try {
+    $input->bind($definition);
+} catch (\Symfony\Component\Console\Exception\RuntimeException $exception) {
+    // Ignore validation issues as we did not yet have the commands definition
+    // As we only need the `--container` option, we are good to go until it is passed *before* the first command argument
+    // Symfony parses the `argv` in its direct order and raises an error when more arguments or options are passed
+    // than described by the default definition.
+}
+
+try {
+    $container = (new ContainerResolver($projectRoot))->resolve($input);
+    $app = (new ApplicationProvisioner())($app, $container);
+} catch (RuntimeException | InvalidArgumentException $exception) {
+    // Usage information provided by the `ContainerResolver` should be passed to the CLI output
+    $containerNotFoundMessage = sprintf('<error>%s</error>', $exception->getMessage());
+}
+
+// By running the app even if its not provisioned allows symfony/console to report problems
+// and/or display available options (like `--container`)
+$exitCode = $app->run(null, $output);
+
+if ($containerNotFoundMessage) {
+    $output->writeln($containerNotFoundMessage);
+    $exitCode = 255;
+}
+
+exit($exitCode);

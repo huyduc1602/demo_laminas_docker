@@ -1,0 +1,128 @@
+@CHARSET "UTF-8";
+/*
+ * YuGothic Regular
+ */
+@font-face {
+  font-family: YuGothic;
+  src: url('../fonts/yu_gothic/YuGothR.ttc');
+  font-style: normal;
+  font-weight: 400;
+}
+
+/*
+ * YuGothic Light
+ */
+@font-face {
+  font-family: YuGothic;
+  src: url('../fonts/yu_gothic/YuGothL.ttc');
+  font-style: normal;
+  font-weight: 300;
+}
+
+/*
+ * YuGothic Medium
+ */
+@font-face {
+  font-family: YuGothic;
+  src: url('../fonts/yu_gothic/YuGothM.ttc');
+  font-style: normal;
+  font-weight: 500;
+}
+
+/*
+ * YuGothic Bold
+ */
+@font-face {
+  font-family: YuGothic;
+  src: url('../fonts/Yu Gothic/YuGothB.ttc');
+  font-style: normal;
+  font-weight: 700;
+}
+
+
+/*
+ * FONT Yu Gothic
+ */
+
+/*
+ * Yu Gothic Regular
+ */
+@font-face {
+  font-family: Yu Gothic;
+  src: url('../fonts/yu_gothic/YuGothR.ttc');
+  font-style: normal;
+  font-weight: 400;
+}
+
+/*
+ * Yu Gothic Light
+ */
+@font-face {
+  font-family: Yu Gothic;
+  src: url('../fonts/yu_gothic/YuGothL.ttc');
+  font-style: normal;
+  font-weight: 300;
+}
+
+/*
+ * Yu Gothic Medium
+ */
+@font-face {
+  font-family: Yu Gothic;
+  src: url('../fonts/yu_gothic/YuGothM.ttc');
+  font-style: normal;
+  font-weight: 500;
+}
+
+/*
+ * Yu Gothic Bold
+ */
+@font-face {
+  font-family: Yu Gothic;
+  src: url('../fonts/yu_gothic/YuGothB.ttc');
+  font-style: normal;
+  font-weight: 700;
+}
+
+/*
+ * FON Hiragino Kaku Gothic Pro
+ */
+@font-face {
+  font-family: Hiragino Kaku Gothic Pro;
+  src: url('../fonts/pro_w3.otf');
+}
+
+/*
+ * FON ヒラギノ角ゴ Pr
+ */
+@font-face {
+  font-family: ヒラギノ角ゴ Pro;
+  src: url('../fonts/pro_w3.otf');
+}
+
+/*
+ * FON Meiryo
+ */
+
+@font-face {
+  font-family: Meiryo;
+  src: url('../fonts/meiryo.ttf');
+}
+
+/*
+ * FON Osaka
+ */
+
+@font-face {
+  font-family: Osaka;
+  src: url('../fonts/osaka.ttc');
+}
+
+/*
+ * FONT MS PGothic
+ */
+
+@font-face {
+  font-family:MS PGothic;
+  src: url('../fonts/ms_gothic.ttf');
+}

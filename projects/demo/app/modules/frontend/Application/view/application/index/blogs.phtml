@@ -1,0 +1,99 @@
+<?php 
+$this->headTitle('Blog');
+/* $mainMenu = $this->partial('application/layout/main-menu.phtml', [
+    'pageTitle' => $pageTitle
+]); */
+$breadcrumb = $this->partial('application/layout/breadcrumb.phtml', [
+    'list' => [
+        ['title' => $this->translate('Home'), 'url' => $this->zfUrl('home')],
+        ['title' => $this->translate('Blog')]
+    ]
+]);
+$this->viewHook()->attachEvt('layoutStruct',
+    function (Laminas\EventManager\Event $evt) use ($breadcrumb){
+    $params = $evt->getParams();
+    $arrayStructs = &$params['layoutStruct'];
+
+    $arrayStructs = array_replace_recursive($arrayStructs, [
+        'header' => [
+            'menuTop' => true,
+        ],
+        'body' => [
+            'breadcrumb' => $breadcrumb,
+            'rightContent' => true,
+            'bodyClass' => ['loop1'=> 'container-fluid custom-size', 'loop2' => 'row custom-top']
+        ]
+        
+    ]);
+});
+
+$serverUrl = \Models\Utilities\UserUpload::getSubDomainLink($this->serverurl(), 'img');
+?>
+<div class="col-12 col-lg-9">
+  <div class="blog__wrapper mt-0">
+  	<?php if(count($list)): ?>
+    <ul>
+      <?php foreach($list as $blog):
+      	$date = date('Y年m月d日', $blog->news_created_at);
+      	$cate = empty($cates[$blog->news_ncate_id]) ? [] : $cates[$blog->news_ncate_id];
+      	$title = $blog->news_title;
+      	$link = $this->zfUrl('blog-detail', ['id' => $blog->news_code, 'title' => $blog->news_title_path_url]);
+      	?>
+        <li class="blog__content__item">
+          <time class="blog__content__date"><?php echo $date; ?></time>
+          <div class="blog__content__category"><span style="color: <?php echo $cate['ncate_txt_color']?>; background-color: <?php echo $cate['ncate_bg_color']?>;"><?php echo $cate['ncate_name']?></span></div>
+          <div class="blog__content__title"><a href="<?php echo $link; ?>">
+            <span><?php echo $title; ?></span></a>
+          </div>
+        </li>
+        <?php endforeach;?>
+    </ul>
+    <?php else: ?>
+    	<span style="color: #ccc"><?php echo $this->translate('There are no articles'); ?></span>
+    <?php endif;?>
+  </div>
+
+  <!-- PAGINATION -->
+  <div class="row mt-4 mb-5">
+    <div class="col-12">
+      <?php
+        echo $this->paginationControl(
+            $paginator, 'Sliding',
+            'application/partial/paginator',
+            ['route' => 'application']
+        );
+        ?>
+    </div>
+  </div>
+
+  <div class="row mb-5">
+    <div class="col-12">
+      <!-- TAGS -->
+      <div class="tags__box">
+        <div class="tags__box__inner">
+          <div class="tags__title"><p><i class="fa fa-tags mr-1"></i>人気のタグ一覧</p></div>
+          <div class="tags__content">
+            <ul>
+            	<?php foreach ($news_tags_most_view as $item):
+            	   $link = $this->zfUrl('blog', [], ['query' => ['f' => $item['ntg_name']]]);
+            	?>
+              	<li><a href="<?php echo $link; ?>"><?php echo $item['ntg_name']; ?></a></li>
+              	<?php endforeach;?>
+            </ul>
+          </div>
+        </div>
+        <div class="tags__box__expand">
+          <a href="#"><i class="fa fa-angle-down"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<?php
+// if(count($list) > 0){
+//     echo $this->partial('application/index/_partial/related_tags.phtml', [relTags => $relTags]); 
+// }
+?>

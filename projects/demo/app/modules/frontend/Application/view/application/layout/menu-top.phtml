@@ -1,0 +1,135 @@
+<?php
+/* $this->headStyleAction(null, [], [
+    'action' => 'header', 'controller' => 'layout',
+    'module' => 'application'
+]);
+
+$this->headScriptAction(null, [], [
+    'action' => 'menu-header', 'controller' => 'layout',
+    'module' => 'application'
+]); */
+
+$pubRes = $this->zfResource();
+?>
+<header id="header" class="header-fixed">
+    <div class="container-fluid header-blocks">
+      <div id="logo">
+		<a href="<?php echo $this->zfUrl('home');?>">
+			<img src="<?= $pubRes->files('shinwa_logo.png', 'images', false) ?>" alt="Shinwa3.com" title="Shinwa3.com" /></img>
+		</a>
+      </div>
+
+      <nav id="nav-menu-container">
+        <ul class="nav-menu">
+        <?php 
+          	$serverUrl = \Models\Utilities\UserUpload::getSubDomainLink($this->serverurl(), 'img');
+          	$baseUrl = $this->serverurl(rtrim(BASE_URL, '/'));
+          	foreach ($menuItems as $item):
+          	     $has_child = empty($item['childs']) == false;
+          	     $childs = $item['childs'];
+          	     $title = $item['menu_title'];
+          	     $icon = \Models\Entities\FEMenu::BASE_IMG_FOLDER . '/'.$item['menu_icon'];
+          	     $type = $item['menu_type'];
+          	     $link = 'javascript:void(0);';
+          	     $styles = @json_decode($item['menu_style']??'[]', true) ?? [];
+          	     if($has_child == false && $type != \Models\Entities\FEMenu::TYPE_TEXT){
+          	         $link = strpos($item['menu_link'], 'http') === false ? $baseUrl . $item['menu_link'] : $item['menu_link'];
+          	     }
+          	?>
+            <li class="<?php echo $styles['class'] ?? ''; echo $has_child ? "menu-has-children" : ''; ?>">
+              <a href="<?php echo $link; ?>">
+                <span><?php echo $title; ?></span>
+              </a>
+              <?php 
+              if($has_child):
+              $child_count = count($childs);
+              ?>
+              <ul>
+                <!-- tối đa 4 cột thì dùng class w-4c, 3 cột thì dùng w-3c, tương tự với 2 cột và 1 cột -->
+                <li>
+                <div class="mega__wrap <?php echo $child_count; ?>">
+                    <div class="d-flex flex-wrap">
+                	<?php 
+                	   foreach ($childs as $item2):
+                	   $styles = @json_decode($item2['menu_style']??'[]', true) ?? [];
+                	   $has_child2 = empty($item2['childs']) == false;
+                	   $childs2 = $item2['childs'];
+                	   $link2 = "";
+                	   if($has_child2 == false && $item2['menu_type'] != \Models\Entities\FEMenu::TYPE_TEXT){
+                	       $link2 = strpos($item2['menu_link'], 'http') === false ? $baseUrl . $item2['menu_link']: $item2['menu_link'];
+                	   }
+                	   $li_content = "<a href=\"{$link2}\">{$item2['menu_title']}</a>";
+                	   if(empty($link2)){
+                	       $li_content = '<a href="javascript:void(0);">'.$item2['menu_title'].'</a>';
+                	   }
+                	?>
+                		<div class="col-12 <?= $styles['class'] ??'' ?>">
+                			<?php if($has_child2 == false): ?>
+                			<?php echo $li_content; ?>
+                        	<?php else: foreach ($childs2 as $item3):
+                        	   $styles = json_decode($item3['menu_style'] ?? '[]', true);
+                            	$element = '';
+                            	switch ($item3['menu_type']){
+                            	    case \Models\Entities\FEMenu::TYPE_LINK:
+                            	    case \Models\Entities\FEMenu::TYPE_REFER_LINK:
+                            	        $element = '<a class="__class__" href="__href__" class="__class__" >__title__</a>';
+                            	        break;
+                            	    case \Models\Entities\FEMenu::TYPE_TEXT:
+                            	        $element = '<span class="__class__ txt-item" >__title__</span>';
+                            	        break;
+                            	    case \Models\Entities\FEMenu::TYPE_INPUT:
+                            	        $element = '<form class="m_form" action="__href__" method="get" enctype="application/x-www-form-urlencoded"><div class="input-group p-1 pl-lg-0">
+                                                        <div class="input-group-prepend">
+                                                        <span class="input-group-text bg-white border-right-0"><i class="fa fa-search"></i></span>
+                                                        </div>
+                                                        <input value="__value__" name="__name__" type="text" class="form-control border-left-0 custom-input __class__" placeholder="__title__">
+                                                        <div class="input-group-append">
+                                                        <span class="submit-add-on input-group-addon input-group-text"><i class="fa fa-search" aria-hidden="true"></i></span></div>
+                                                    </div></form>';
+                            	        break;
+                            	    default: break;
+                            	}
+                            	if ( 0 === strpos($item3['menu_link'], 'http') ){
+                            	    $url = $item3['menu_link'];
+                            	}
+                            	else{
+                            	    $url = $serverUrl . $item3['menu_link'];
+                            	    if ( $item3['menu_has_post'] ){
+                            	        $url = $serverUrl . 
+                                	        \Models\Entities\Post::POST_BASE_URL .'/'. 
+                            	               ltrim($item3['menu_link'], '/');
+                            	    }
+                            	}
+                            	
+                            	$styles = array_replace([
+                            	    'border' => '', 'class' => '', 'content' => '', 'url' => ''
+                            	], $styles);
+                            	
+                            	$element = str_replace([
+                            	    '__href__', '__class__', '__title__', '__name__', '__value__'
+                            	], [
+                            	    $url, $styles['class'],
+                            	    $this->translate($item3['menu_title']), $styles['name'], $_GET[$styles['name']]
+                            	], $element);
+                            	
+                            	if ($styles['border']){
+                            	    $borderW = max(1, (int)$styles['border']['width']);
+                            	    $border = 'style="border:' .$borderW. 'px solid '.$styles['border']['color'].';"';
+                            	}
+                        	?>
+                        	<div <?php  $border ?? '' ?>><?php echo $styles['content'] ?? ''; echo $element; ?></div>
+                        	<?php endforeach; endif;?>
+                      	</div>
+                  	<?php endforeach;?>
+                  	   	</div>
+                  	</div>
+                </li>
+              </ul>
+              <?php endif;?>
+            </li>
+			<?php endforeach;?>
+        </ul>
+      </nav><!-- #nav-menu-container -->
+    </div>
+  </header><!-- #header -->
+  

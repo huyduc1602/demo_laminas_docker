@@ -1,0 +1,206 @@
+<?php
+$this->headTitle($this->translate('Rec-entry form'));
+
+$this->viewHook()->attachEvt('layoutStruct', function (Laminas\EventManager\Event $evt) {
+    $params = $evt->getParams();
+    $arrayStructs = &$params['layoutStruct'];
+    $arrayStructs = array_replace_recursive($arrayStructs, [
+        'headMeta'=> [
+            'description' => $this->translate('ジルネスタの採用応募のためのエントリーフォームページです。ご応募を希望される方はこちらよりエントリーをお願い致します。'),
+            'keyword'     => 'ジルネスタ,採用,応募,アルバイト,新卒,中途,技術',
+        ],
+        'header' => [
+            'menuTop' => true,
+            'banner' => false,
+            'mainMenu' => false
+        ],
+        'body' => [
+            'banner' => false,
+            'bodyClass' => [
+                'loop1' => 'container',
+                'loop2' => 'row'
+            ]
+        ]
+    ]);
+});
+
+$this->headScriptAction(null, [
+    '__network_error__' => $this->translate('Some error occur when process your request. Please try later!'),
+], [
+    'action' => 'rec-entry',
+    'controller' => 'index',
+    'module' => 'application'
+]);
+$serverUrl = \Models\Utilities\UserUpload::getSubDomainLink($this->serverurl(), 'img');
+?>
+
+<div class="col-12 mt-5">
+	<div class="text-center">
+		<h1 class="hero__title">
+			<span class="">応募エントリーフォーム</span>
+		</h1>
+	</div>
+</div>
+<div class="col-12">
+	<div class="shadow wrap__margin bg-white p-5">
+			<form id="rec-entry__form" class="rec-entry__form" action="<?= $this->zfUrl('confirm-rec') ?>" method="post">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="hero__note">
+                            <p class="mb-0">下記のエントリーフォームに、必要事項をご入力の上、最後に確認ボタンを押してください。</p>
+                            <p>※各項目は全て、必須入力となりますのでご注意ください。</p>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <p class="mb-2 inquires__label">						
+                            希望職種: <span class="required">必須</span>
+                        </p>
+                        <select class="inquiries__input" name="rec_job" id="rec_job">
+                            <option selected="selected" value="">選択してください</option>
+                            <option value="営業">営業</option>
+                            <option value="テレフォンアポイント">テレフォンアポイント</option>
+                        </select>
+                        <div class="warning-box"><span class="warning-txt"></span></div>
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="mb-2 mt-5 inquiries__label">
+                                姓 : <span class="required">必須</span>
+                                </p>
+                                <input type="text" value="<?= $data['first_name'] ?>" id="first_name" name="first_name" class="inquiries__input input-plain" maxlength="100">
+                                <div class="warning-box"><span class="warning-txt"></span></div>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="mb-2 mt-5 inquiries__label">
+                                名 : <span class="required">必須</span>
+                                </p>
+                                <input type="text" value="<?= $data['last_name'] ?>" id="last_name" name="last_name" class="inquiries__input input-plain" maxlength="100">
+                                <div class="warning-box"><span class="warning-txt"></span></div>
+                            </div>
+                        </div>
+                       
+                    </div> 
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="mb-2 mt-5 inquiries__label">
+                                    せい: <span class="required">必須</span>
+                                </p>
+                                <input type="text" value="<?= $data['rec_sei'] ?>" id="rec_sei" name="rec_sei" class="inquiries__input input-plain" maxlength="100">
+                                <div class="warning-box"><span class="warning-txt"></span></div>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="mb-2 mt-5 inquiries__label">
+                                    めい: <span class="required">必須</span>
+                                </p>
+                                <input type="text" id="rec_mei" value="<?= $data['rec_mei'] ?>" name="rec_mei" class="inquiries__input input-plain" maxlength="100">
+                                <div class="warning-box"><span class="warning-txt"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <p class="mb-2 mt-5 inquiries__label">
+                            性別: <span class="required">必須</span>
+                        </p>
+                        <div class="row">
+                            <div class="col-6 col-md-3">
+                                <label class="custom__default custom-radio"> 男性<input type="radio"  name="sex_rec" value="男性"> <span class="checkmark"></span></label>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <label class="custom__default custom-radio"> 女性<input type="radio"  name="sex_rec" value="女性"> <span class="checkmark"></span></label>
+                            </div>
+                            <div class="col-12">
+                                <div class="warning-box"><span class="warning-txt"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <p class="mb-2 mt-5 inquiries__label">
+                            生年月日: <span class="required">必須</span> 
+                            <span class="text-danger">※半角数字</span>
+                        </p>
+                        <div class="row">
+                            <div class="col-3">
+                                <input id="year_of_birth" value="<?= $data['year_of_birth'] ?>" name="year_of_birth" class="inquiries__input input-plain" type="text" placeholder="年" maxlength="4"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  />
+                                <div class="warning-box"><span class="warning-txt"></span></div>
+                            </div>
+                            <div class="col-3">
+                                <input id="month_of_birth" value="<?= $data['month_of_birth'] ?>" name="month_of_birth" class="inquiries__input input-plain" type="text" placeholder="月　" maxlength="2"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                                <div class="warning-box"><span class="warning-txt"></span></div>
+                            </div>
+                            <div class="col-3">
+                                <input id="day_of_birth" value="<?= $data['day_of_birth'] ?>" name="day_of_birth" class="inquiries__input input-plain" type="text" placeholder="日" maxlength="2"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                                <div class="warning-box"><span class="warning-txt"></span></div>
+                            </div>
+                            <div class="col-3">
+                                <input id="age" name="age" value="<?= $data['age'] ?>" class="inquiries__input input-plain" type="text" placeholder="歳" maxlength="3"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                                <div class="warning-box"><span class="warning-txt"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <p class="mb-2 mt-5 inquiries__label">
+                            郵便番号: <span class="required">必須</span>
+                            <span class="text-danger">※半角数字</span>
+                        </p>
+                        <input type="text" value="<?= $data['zipcode'] ?>"  id="zipcode" name="zipcode" class="inquiries__input" maxlength="7"
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" 
+                        onKeyUp="AjaxZip3.zip2addr(this,'','province','address');">
+                        <div class="warning-box"><span class="warning-txt"></span></div>
+                    </div>
+                    <div class="col-12">
+                         <p class="mb-2 mt-5 inquiries__label">
+                            都道府県: <span class="required">必須</span>
+                        </p>
+                        <input type="text" id="province" name="province" class="inquiries__input p-region" maxlength="200"/><br>
+                        <div class="warning-box"><span class="warning-txt"></span></div>
+                    </div>
+                    <div class="col-12">
+                        <p class="mb-2 mt-5 inquiries__label">
+                            住所: <span class="required">必須</span>
+                        </p>
+                        <input type="text" id="address" value="<?= $data['address'] ?>" name="address" class="inquiries__input p-locality p-street-address input-plain" maxlength="200">
+                        <div class="warning-box"><span class="warning-txt"></span></div>
+                    </div>
+                    <div class="col-12">
+                        <p class="mb-2 mt-5 inquiries__label">
+                            電話番号: <span class="required">必須</span>
+                            <span class="text-danger">※半角数字</span>
+                        </p>
+                        <input type="text" value="<?= $data['rec_phone'] ?>" id="rec_phone" name="rec_phone" class="inquiries__input"  maxlength="20"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                        <div class="warning-box"><span class="warning-txt"></span></div>
+                    </div>
+                    <div class="col-12">
+                        <p class="mb-2 mt-5 inquiries__label">
+                            メールアドレス: <span class="required">必須</span>
+                        </p>
+                        <input type="email" value="<?= $data['rec_email'] ?>" id="rec_email" name="rec_email" class="inquiries__input" maxlength="450">
+                        <div class="warning-box"><span class="warning-txt"></span></div>
+                    </div>
+                    <div class="col-12">
+                        <p class="mb-2 mt-5 inquiries__label">
+                            自己PR・経験: <span class="required">必須</span>
+                        </p>
+                        <textarea class="inquiries__input input-plain" id="experience" value="<?= $data['experience'] ?>" name="experience" maxlength="2000"></textarea>
+                        <div class="warning-box"><span class="warning-txt"></span></div>
+                        <div id="the-count">
+                            <span id="current">0</span>
+                            <span id="maximum">/ 2000</span>
+  					    </div>
+                        <p class="text-danger">※端的に箇条書きで結構ですので、現在までのお仕事でのご経験や得意業務、スキルなどをお書き下さい。</p>
+                    </div>
+                </div>
+            
+				<div class="col-12">
+					<a href="javascript:void(0)"id="next-step" class="mt-5 submit__btn">内容を確認して送信</a>
+				</div>
+			</form>
+		
+	</div>
+</div>

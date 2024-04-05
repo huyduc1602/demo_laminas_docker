@@ -1,0 +1,25 @@
+<?php
+defined('SENTRY_LOAD') || define('SENTRY_LOAD', true);
+
+return [
+    'sentry' => [
+        'disable_module' => false,
+        'options' => [
+            'dsn' => DSN_SENTRY,
+            'environment' => SENTRY_ENV,
+        ],
+        'javascript' => [
+            'inject_script' => false, // enable it
+            'options' => [
+                'dsn' => DSN_SENTRY,
+                'environment' => SENTRY_ENV,
+            ],
+            // script options (defaults)
+            'script' => [
+                'src' => SENTRY_SCRIPT_SRC,
+                'integrity' => SENTRY_SCRIPT_INTER,
+                'crossorigin' => 'anonymous',
+            ],
+        ],
+    ],
+];

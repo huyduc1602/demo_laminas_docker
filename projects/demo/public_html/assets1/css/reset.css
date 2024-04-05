@@ -1,0 +1,75 @@
+/* FONTS */
+/* @font-face {
+  font-family: 'Meiryo';
+  src: url('../fonts/Meiryo.ttf');
+} */
+html:not([lang=ja]), html:not([lang=ja]) body{
+	font-family: sans-serif,roboto,Tahoma;
+}
+html[lang=ja], html[lang=ja] body{font-family:"游ゴシック", YuGothic,"游ゴシック","Yu Gothic","ヒラギノ角ゴ Pro", "Hiragino Kaku Gothic Pro", "メイリオ", "Meiryo", Osaka, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif !important;}
+html[lang=ja] body code, html[lang=ja] body kbd, html[lang=ja] body samp {
+    font-family:font-family:"游ゴシック", YuGothic,"游ゴシック","Yu Gothic","ヒラギノ角ゴ Pro", "Hiragino Kaku Gothic Pro", "メイリオ", "Meiryo", Osaka, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif !important;
+}
+
+html[lang=ja], html[lang=ja] body select {font-family:"游ゴシック", YuGothic,"游ゴシック","Yu Gothic","ヒラギノ角ゴ Pro", "Hiragino Kaku Gothic Pro", "メイリオ", "Meiryo", Osaka, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif !important;}
+html[lang=ja], html[lang=ja] body input{font-family:"游ゴシック", YuGothic,"游ゴシック","Yu Gothic","ヒラギノ角ゴ Pro", "Hiragino Kaku Gothic Pro", "メイリオ", "Meiryo", Osaka, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif !important;}
+html[lang=ja], html[lang=ja] body textarea{font-family:"游ゴシック", YuGothic,"游ゴシック","Yu Gothic","ヒラギノ角ゴ Pro", "Hiragino Kaku Gothic Pro", "メイリオ", "Meiryo", Osaka, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif !important;}
+html[lang=ja], html[lang=ja] body button{font-family:"游ゴシック", YuGothic,"游ゴシック","Yu Gothic","ヒラギノ角ゴ Pro", "Hiragino Kaku Gothic Pro", "メイリオ", "Meiryo", Osaka, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif !important;}
+/*html, body{font-family:"Helvetica Neue", Helvetica, Arial, sans-serif!important;color: #495750;}
+html, button, input, select, textarea{font-family: sans-serif!important;}*/
+
+body
+{
+	border: 0 none;
+	margin: 0;
+	outline: 0 none;
+	padding: 0;
+	font-weight: normal;
+	color:#313131;
+	background-color:#ffff;	
+	line-height:20px;
+	font-size:14px;
+	-webkit-font-smoothing: antialiased;
+}
+a{ text-decoration:none;}
+a:hover
+{
+	color:#006599;
+	text-decoration: none;
+	cursor:pointer;
+}
+img{ border:0}
+input{ border:0}
+div{ display:block;}
+.clearfix{clear:both}
+ul{list-style-type:none; padding:0; margin:0}
+.overlay{display:none}
+
+/*TYPOGRAPHY*/
+h1 {font-size:25px;letter-spacing:.5px;line-height: 30px;margin:0;}
+h2 {font-size:18px;line-height: 26px;margin:0;}
+h3 {font-size:16px;line-height:24px;margin:0;}
+h4 {font-size:15px;line-height:22px;letter-spacing:-0.03em;padding:0 0 15px;margin:0;padding:5px 0 5px 0;}
+h5 {font-size:15px;line-height:22px;letter-spacing:-0.1px;margin:0;padding:5px 0 5px 0;}
+h6 {font-size:15px;line-height:22px;margin:0;padding:5px 0 5px 0;}
+
+p{padding:0 0 10px 0;margin:0;}
+p:empty {display:none;}
+ul li {list-style:none;}
+ol li {list-style:decimal inside;}
+
+img{border:none;display:block;margin:0 auto;}
+
+hr {background:#ccc;height:1px;border:none;width:100%;display:inline-block;margin:14px 0 4px;}
+table { border-collapse: collapse; border-spacing:0;}
+
+::-moz-selection {background:#00B6EA;color:#fff;}
+::selection    {background:#00B6EA;color:#fff;}
+.not-allow{pointer-events: none}
+.transparent-5{
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+	filter: alpha(opacity=50);
+	-moz-opacity:0.5;
+	-khtml-opacity: 0.5;
+	opacity: 0.6;
+}

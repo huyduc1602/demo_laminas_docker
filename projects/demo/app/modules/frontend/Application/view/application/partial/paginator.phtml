@@ -1,0 +1,72 @@
+<?php
+// Get query.
+$queryPageString = $queryLimitString = $_GET;
+
+// Create query limit page.
+$queryLimitString ["limit"] = "__LIMIT__";
+$queryLimitString = "?" . http_build_query ( $queryLimitString );
+
+// Create query curent page.
+$queryPageString ["page"] = "__PAGE__";
+$queryPageString = "?" . http_build_query ( $queryPageString );
+// Create array content maximum number of items available of each page.
+$arrCountPerPage = array ();
+$itemPerPage = $this->itemCountPerPage;
+$strLines = ($itemPerPage == PHP_INT_MAX ? $this->translate ( "All" ) : $itemPerPage);
+?>
+<nav class="text-center">
+	<ul class="pagination pg-teal d-flex justify-content-center">
+	   <!-- custome_data -->
+      	<?php 
+      		if($this->pageCount):
+      			$hasPrevious = isset($this->previous) ? true : false;
+      			$previousClass = $hasPrevious ? '' : 'disabled"';
+      			$linkFirst = $hasPrevious ? str_replace("__PAGE__", $this->first, $queryPageString) : 'javascript:void(0);';
+      			$linkPrevious = $hasPrevious ? str_replace("__PAGE__", $this->previous, $queryPageString) : 'javascript:void(0);';
+      	?>
+	    <li class="page-item <?php echo $previousClass; ?>">
+	      	<a class="page-link" href="<?php echo $linkFirst; ?>" aria-label="First">
+	        	<span aria-hidden="true"><i class="fa fa-angle-double-left"></i></span>
+	      	</a>
+	    </li>
+	    <li class="page-item <?php echo $previousClass; ?>">
+	      	<a class="page-link" href="<?php echo $linkPrevious; ?>" aria-label="Previous">
+	      	    <span aria-hidden="true"><i class="fa fa-angle-left"></i></span>
+                <span class="sr-only"><?php echo $this->translate('Previous')?></span>
+	      	</a>
+	    </li>
+	    <?php
+	    	foreach($this->pagesInRange as $page):
+	    	
+	    		$isCurrent = ($page == $this->current) ? true : false;
+	    		$link = $isCurrent ? 'javascript:void(0);' : str_replace("__PAGE__", $page, $queryPageString);
+	    		$class = $isCurrent ? 'active' : '';
+	    ?>
+	    <li class="page-item <?php echo $class; ?>">
+	      	<a class="page-link" href="<?php echo $link; ?>" aria-label="<?php echo $page; ?>">
+	        	<span aria-hidden="true"><?php echo $page; ?></span>
+	      	</a>
+	    </li>
+	    <?php
+	    	endforeach;
+	    	$hasNext = isset($this->next) ? true : false;
+	    	$nextClass = $hasNext ? '' : 'disabled"';
+	    	$linkNext = $hasNext ? str_replace("__PAGE__", $this->next, $queryPageString) : 'javascript:void(0);';
+	    	$linkLast = $hasNext ? str_replace("__PAGE__", $this->last, $queryPageString) : 'javascript:void(0);';
+	    ?>
+	    <li class="page-item <?php echo $nextClass; ?>">
+	      	<a class="page-link" href="<?php echo $linkNext; ?>" aria-label="Next">
+	      	    <span aria-hidden="true"><i class="fa fa-angle-right"></i></span>
+                <span class="sr-only"><?php echo $this->translate('Next')?></span>
+	      	</a>
+	    </li>
+	    <li class="page-item <?php echo $nextClass; ?>">
+	      	<a class="page-link" href="<?php echo $linkLast; ?>" aria-label="Last">
+	        	<span aria-hidden="true"><i class="fa fa-angle-double-right"></i></span>
+	      	</a>
+	    </li>
+    <?php
+    	endif;
+    ?>
+  </ul>
+</nav>

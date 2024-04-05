@@ -1,0 +1,31 @@
+{
+	"name": "demo-com/local",
+	"description": "demo.com",
+	"type": "project",
+	"license": "BSD-3-Clause",
+	"keywords": [
+		"framework",
+		"mvc",
+		"zf3"
+	],
+	"homepage": "https://demo.com",
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"require": {
+		"php": "^8",
+		"ext-gd": "*",
+		"ext-intl": "*"
+	},
+	"autoload": {
+		"psr-4": {
+			"Models\\": "../../Models/",
+			"Application\\": "Application/src"
+		}
+	},
+	"scripts": {
+		"development-disable": "laminas-development-mode disable",
+		"development-enable": "laminas-development-mode enable",
+		"development-status": "laminas-development-mode status",
+		"serve": "php -S 0.0.0.0:8080 -t public_html/ public_html/index.php"
+	}
+}

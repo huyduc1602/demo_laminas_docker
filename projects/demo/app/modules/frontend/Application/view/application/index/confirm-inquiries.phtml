@@ -1,0 +1,149 @@
+<?php
+$this->headTitle('お問い合わせ内容確認');
+$this->viewHook()->attachEvt('layoutStruct', function (Laminas\EventManager\Event $evt) {
+    $params = $evt->getParams();
+    $arrayStructs = &$params['layoutStruct'];
+    $arrayStructs = array_replace_recursive($arrayStructs, [
+        'header' => [
+            'menuTop' => true,
+            'banner' => false,
+            'mainMenu' => false
+        ],
+        'body' => [
+            'banner' => false,
+            'bodyClass' => [
+                'loop1' => 'container',
+                'loop2' => 'row'
+            ]
+        ],
+        'headMeta'=> [
+            'description' => 'お問い合わせ内容を確認するページです。',
+        ]
+    ]);
+});
+
+$this->headStyleAction('.p-l-15{ padding-left: 15px }');
+$inq['act'] = 'send';
+$this->headScriptAction(null, [
+    '__inq__' => json_encode($inq),
+    '__network_error__' => $this->translate('Some error occur when process your request. Please try later!'),
+], [
+    'action' => 'confirm_inq',
+    'controller' => 'index',
+    'module' => 'application'
+]);
+$serverUrl = \Models\Utilities\UserUpload::getSubDomainLink($this->serverurl(), 'img');
+
+?>
+
+<div class="col-12">
+	<div class="text-center">
+		<h1 class="hero__title">
+			<span class="">お問い合わせフォーム</span>
+		</h1>
+	</div>
+</div>
+<div class="col-12">
+    <div class="shadow wrap__margin bg-white p-5">
+        <form class="inquiries__confirm" id="inquiries__confirm" action="/confirm-inquiries" method="post">
+            <div class="row">
+                <div class="col-12">
+                    <div class="hero__note">
+                        <p class="mb-5">ご入力内容をご確認ください。</p>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <p class="mb-2 inquires__label">
+                        お問い合わせ内容: <span class="required">必須</span>
+                    </p>
+                    <div class="warning-box relative"><span class="warning-txt"></span></div>
+                    <div class="row custom-padding">
+                        <?php $types = [
+                            'iOS、Androidアプリ、Webシステム開発事業',
+                            'WEBマーケティングについて',
+                            'MEO・SEOについて',
+                            'WEBサービス販売について',
+                            'LP・サイト制作について',
+                            '採用について',
+                            'その他',
+                        ];
+                        ?>
+                        <?php foreach ($types as $key => $val):?>
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                                <label class="custom__default custom-checkbox relative"><?php echo $val; ?>
+                                    <input type="checkbox" <?= in_array($val, $inq['inq_services']) ? 'checked' : ''?>
+                                           name="inq_services[]"
+                                           id="inq_service_<?= $key ?>"
+                                           class="sv-types"
+                                           value="<?php echo $val; ?>">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <div class="disbled-form"></div>
+                            </div>
+                        <?php endforeach;?>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <p class="mb-2 mt-5 inquiries__label">
+                        貴社名: <span class="required">必須</span>
+                    </p>
+                    <input type="text" require="required" name="company_name" value="<?= $inq['company_name']?>" id="company_name" class="inquiries__input" readonly>
+                    <div class="warning-box"><span class="warning-txt"></span></div>
+                </div>
+
+                <div class="col-12">
+                    <p class="mb-2 mt-5 inquiries__label">
+                        部署名:
+                    </p>
+                    <input type="text" require="required" name="department_name" value="<?= $inq['department_name']?>" id="department_name" class="inquiries__input" readonly>
+                </div>
+
+                <div class="col-12">
+                    <p class="mb-2 mt-5 inquiries__label">
+                        ご担当者名: <span class="required">必須</span>
+                    </p>
+                    <input type="text" require="required" name="person_inCharge" id="person_inCharge" value="<?= $inq['person_inCharge']?>" class="inquiries__input" readonly>
+                    <div class="warning-box"><span class="warning-txt"></span></div>
+                </div>
+
+                <div class="col-12">
+                    <p class="mb-2 mt-5 inquiries__label">
+                        メールアドレス: <span class="required">必須</span>
+                    </p>
+                    <input require="required" type="email" name="inq_email" id="inq_email" value="<?= $inq['inq_email']?>" class="inquiries__input" readonly>
+                    <div class="warning-box"><span class="warning-txt"></span></div>
+                </div>
+                <div class="col-12">
+                    <p class="mb-2 mt-5 inquiries__label">
+                        電話番号: <span class="required">必須</span>
+                    </p>
+                    <input type="number" name="inq_phone" id="inq_phone" value="<?= $inq['inq_phone']?>"  class="inquiries__input" readonly> 
+                    <div class="warning-box"><span class="warning-txt"></span></div>
+                </div>
+                <div class="col-12">
+                    <p class="mb-2 mt-5 inquiries__label">
+                        貴社サイトのURL:
+                    </p>
+                    <input type="text" name="inq_url" value="<?= $inq['inq_url']?>" id="inq_url" class="inquiries__input" readonly>
+                </div>
+                <div class="col-12">
+                    <p class="mb-2 mt-5 inquiries__label">
+                        お問い合わせ本文:
+                    </p>
+                    <textarea class="inquiries__input" id="inq_content"name="inq_content" readonly><?= $inq['inq_content']?></textarea>
+                </div>
+
+                <div class="col-12 text-center">
+                    <a href="javascript:void(0)" id="next-step" class="mt-5 mb-3 submit__btn">送信</a>
+                    <a href="javascript:void()" class="back_FormConfirm">入力画面へ戻る</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="page-loader" class="page-loader" style="display: none;position: fixed;top: 0;right: 0;left: 0;bottom: 0;z-index: 2000;text-align: center;background-color: #ddd;opacity: 0.5;">
+    <i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="position: absolute;top: 50%;left: 50%;z-index: 1000;text-align: center;"></i>
+    <span class="sr-only"><?= $this->translate('Loading...')?></span>
+</div>

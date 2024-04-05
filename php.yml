@@ -4,6 +4,9 @@ services:
     container_name: php_apache_debian
     
     image: php_apache
+  #  build:
+  #    context: .
+  #    dockerfile: DockerfilePHP
     
     ports:
       - "80"
@@ -14,9 +17,10 @@ services:
       - "./httpd:/etc/httpd"
       - "./supervisor:/etc/supervisor/conf.d/"
       - "./projects:/var/www/projects/"
+      - "./data/certs/:/etc/ssl"
       
     environment:
-      - VIRTUAL_HOST=*.laminas.local,laminas.local
+      - VIRTUAL_HOST=*.laminas.local,laminas.local,*.demo.local,demo.local
       - VIRTUAL_PROTO=http
       - HTTPS_METHOD=noredirect
       - VIRTUAL_PORT=80

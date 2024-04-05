@@ -1,0 +1,17 @@
+<div class="row no-gutters">
+    <div class="col-12">
+        <div class="card card-body mb-3">
+            <h5 class="side-title md-fs"><?php echo $this->translate('Related tags') ?></h5>
+            <div class="side-list">
+                <div class="tags-box sidebar-tags p-0 justify-content-start">
+                    <?php foreach ($relTags as $item):?>
+                    <a href="<?php echo $this->zfUrl('search', [], [query => [f => $item['ntg_name']]]);?>" class="tag"><?php echo $item['ntg_name']?></a>
+                    <?php endforeach;?>
+                    <?php if(empty($relTags)):?>
+                	<span style="color: #ccc"><?php echo $this->translate('Not found');?></span>
+                	<?php endif;?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

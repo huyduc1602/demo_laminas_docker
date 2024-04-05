@@ -1,0 +1,94 @@
+{
+    "name": "mezzio/mezzio-skeleton",
+    "description": "Laminas mezzio skeleton. Begin developing PSR-15 middleware applications in seconds!",
+    "type": "project",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "laminas",
+        "mezzio",
+        "skeleton",
+        "middleware",
+        "psr",
+        "psr-7",
+        "psr-11",
+        "psr-15"
+    ],
+    "homepage": "https://mezzio.dev",
+    "support": {
+        "docs": "https://docs.mezzio.dev/mezzio/",
+        "issues": "https://github.com/mezzio/mezzio-skeleton/issues",
+        "source": "https://github.com/mezzio/mezzio-skeleton",
+        "rss": "https://github.com/mezzio/mezzio-skeleton/releases.atom",
+        "chat": "https://laminas.dev/chat",
+        "forum": "https://discourse.laminas.dev"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    },
+    "extra": {
+        "laminas": {
+            "component-whitelist": [
+                "mezzio/mezzio",
+                "mezzio/mezzio-helpers",
+                "mezzio/mezzio-router",
+                "laminas/laminas-httphandlerrunner",
+                "mezzio/mezzio-fastroute",
+                "mezzio/mezzio-laminasviewrenderer"
+            ]
+        }
+    },
+    "require": {
+        "php": "^8.0",
+        "aws/aws-sdk-php": "^3.173",
+        "beberlei/doctrineextensions": "^1.3",
+        "doctrine/doctrine-module": "^6.0",
+        "doctrine/doctrine-orm-module": "^6.0",
+        "doctrine/orm": "^2.7",
+        "enqueue/rdkafka": "^0.10.5",
+        "laminas/laminas-cache": "^3.1",
+        "laminas/laminas-cache-storage-adapter-filesystem": "^2.0",
+        "laminas/laminas-cache-storage-adapter-redis": "^2.0",
+        "laminas/laminas-config-aggregator": "^1.5",
+        "laminas/laminas-crypt": "^3.3",
+        "laminas/laminas-diactoros": "^2.6",
+        "laminas/laminas-log": "^2.13",
+        "laminas/laminas-mail": "^2.12",
+        "laminas/laminas-serializer": "^2.9",
+        "laminas/laminas-servicemanager": "^3.4",
+        "laminas/laminas-stdlib": "^3.2.1",
+        "laminas/laminas-zendframework-bridge": "^1.0",
+        "mezzio/mezzio": "^3.5",
+        "mezzio/mezzio-fastroute": "^3",
+        "mezzio/mezzio-helpers": "^5.3",
+        "mezzio/mezzio-swoole": "^4",
+        "minishlink/web-push": "^7.0",
+        "monolog/monolog": "^2.3",
+        "openai-php/client": "^0.8.1",
+        "sngrl/php-firebase-cloud-messaging": "dev-master",
+        "swoole/ide-helper": "^4.6",
+        "web-token/jwt-framework": "^3.0",
+        "zbateson/mail-mime-parser": "^2.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.3.7",
+        "filp/whoops": "^2.7.1",
+		"symfony/var-dumper": "^v6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "GrootSwoole\\": "./groot-swoole/"
+        },
+        "files": [
+            "./groot-swoole/Helpers/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+        }
+    },
+    "scripts": {
+    }
+}

@@ -1,0 +1,64 @@
+<?php 
+$this->headStyleAction(null, [], [
+    'action' => 'menu-right', 'controller' => 'layout',
+    'module' => 'application'
+]);
+?>
+<div class="col-12 col-lg-3">
+	<div class="row no-gutters">
+		<div class="col-12">
+			<div class="card card-body mb-3 mt-3 mt-lg-0">
+				<form>
+					<h5 class="side-title md-fs"><?php echo $this->translate('Search') ?></h5>
+					<div class="input-group">
+						<input type="text" name="keyword" id="keyword" value="" class="form-control input-md" placeholder="Keyword">
+						<button class="btn-search"><i class="fa fa-search"></i></button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<div class="col-12">
+			<div class="card card-body mb-3">
+				<h5 class="side-title md-fs"><?php echo $this->translate('Most viewed category') ?></h5>
+				<div class="side-list ranking">
+					<ul>
+						<li><a href="#">ニキタおふカスオャ他二手差。</a></li>
+						<li><a href="#">ニキタおふカスオャ他二手差。</a></li>
+						<li><a href="#">ニキタおふカスオャ他二手差。</a></li>
+						<li><a href="#">ニキタおふカスオャ他二手差。</a></li>
+						<li><a href="#">ニキタおふカスオャ他二手差。</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="col-12">
+			<div class="card card-body mb-3">
+				<h5 class="side-title md-fs"><?php echo $this->translate('List of popular tags') ?></h5>
+				<div class="side-list">
+					<div class="tags-box sidebar-tags p-0 justify-content-start">
+						<a href="#" class="tag">サンプ（50）</a>
+						<a href="#" class="tag">トルサン（49）</a>
+						<a href="#" class="tag">サンプ（45）</a>
+						<a href="#" class="tag">サンプ（30）</a>
+						<a href="#" class="tag">ルタイトルサ（26）</a>
+						<a href="#" class="tag">サ（9）</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-12">
+			<div class="card card-body mb-3">
+				<h5 class="side-title md-fs"><?php echo $this->translate('Big category') ?></h5>
+				<div class="side-list">
+					<ul>
+						<li><a href="#"><?php echo $this->translate('News / Notice') ?></a></li>
+						<li><a href="#"><?php echo $this->translate('Function related and usage') ?></a></li>
+						<li><a href="#"><?php echo $this->translate('Jilnesta Life') ?></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

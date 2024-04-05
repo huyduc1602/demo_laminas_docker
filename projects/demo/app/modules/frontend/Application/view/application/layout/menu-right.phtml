@@ -1,0 +1,35 @@
+<?php
+$this->headStyleAction(null, [], [
+    'action' => 'menu-right', 'controller' => 'layout',
+    'module' => 'application'
+]);
+?>
+<!-- SIDEBAR -->
+<div class="col-12 col-lg-3">
+	 <?php /*if(empty($data['hidden_most_news_view']) && empty($menuItems['news_most_view']) == false):?>
+      <div class="top">
+        <div class="top__title">
+          <h3><?php echo $this->translate('Most viewed post') ?></h3>
+        </div>
+        <div class="top__list">
+          <ul>
+            <?php foreach ($menuItems['news_most_view'] as $item):?>
+			<li><a href="<?php echo $this->zfUrl('blog-detail', ['id' => $item['news_code']])?>"><?php echo $item['news_title']?></a></li>
+			<?php endforeach;?>
+          </ul>
+        </div>
+      </div>
+  	<?php endif;*/?>
+  <div class="side-cate">
+    <div class="top__title">
+      <h3><?php echo $this->translate('Category') ?></h3>
+    </div>
+    <div class="cate__list">
+      <ul>
+        <?php foreach ($menuItems['cates_most_view'] as $item):?>
+		<li><a href="<?php echo $this->zfUrl('blog', [], [query => [cate => $item['ncate_id']]])?>"><?php echo $item['ncate_name']; ?></a></li>
+		<?php endforeach;?>
+      </ul>
+    </div>
+  </div>
+</div>

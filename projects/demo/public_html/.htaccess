@@ -1,0 +1,46 @@
+RewriteEngine On
+#File not exists -> 404 page
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} (\.(png|jpg|gif|jpeg|bmp|css|js|ico|json))$
+RewriteRule (.*) 404.php [NC,L]
+
+# The following rule tells Apache that if the requested filename
+# exists, simply serve it.
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [L]
+# The following rewrites all other queries to index.php. The 
+# condition ensures that if you are using Apache aliases to do
+# mass virtual hosting or installed the project in a subdirectory,
+# the base path will be prepended to allow proper resolution of
+# the index.php file; it will work in non-aliased environments
+# as well, providing a safe, one-size fits all solution.
+RewriteCond %{REQUEST_URI}::$1 ^(/.+)/(.*)::\2$
+RewriteRule ^(.*) - [E=BASE:%1]
+RewriteRule ^(.*)$ %{ENV:BASE}/index.php [L]
+
+# Add video type
+AddType video/ogg  .ogv
+AddType video/mp4  .mp4
+AddType video/webm .webm
+AddType image/png .png
+#AddType font .ttc
+# No gzip with video request
+SetEnvIfNoCase Request_URI \.(og[gv]|mp4|m4v|webm)$ no-gzip dont-vary
+
+<IfModule mod_headers.c>
+    #<FilesMatch "\\.(ico|jpe?g|png|gif|swf|css|js|map)$">
+    #    Header set Cache-Control "max-age=86400, public"
+    #</FilesMatch>
+	<FilesMatch "\\.(ttc|eot|svg|ttf|woff|woff2)$">
+        Header set Cache-Control "max-age=2592000, public"
+    </FilesMatch>
+    <FilesMatch "\\.(x?html?|php)$">
+       Header set Cache-Control "max-age=60, private, must-revalidate"
+    </FilesMatch>
+    Header unset ETag
+    Header unset Last-Modified
+</IfModule>

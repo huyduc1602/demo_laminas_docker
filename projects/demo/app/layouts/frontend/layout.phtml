@@ -1,0 +1,315 @@
+<?php
+
+$pubRes = $this->zfResource();
+
+$urlDefault = $this->serverurl();
+
+$arrayStructs = [
+    'headMeta'=> [
+        'description' => $this->translate('熟成肉専門：エイジングビーフ、定食以上、割烹未満：釜元はん米衛　釜元たん米衛を運営しております。'),
+        'keyword'     => '熟成肉専門, 定食, 割烹, 焼肉',
+        'url'         => $urlDefault,
+        'img'         => [
+            'url'   => $this->serverurl() . $pubRes->files('top00-1_agingbeef.jpg', 'images', false),
+            'width' => '1024',
+            'height'=> '800',
+            'type'  => 'png'
+        ]
+    ],
+    'header' => [
+        'menuTop' => true
+    ],
+    'body'  => [
+        'breadcrumb' => false,
+        'rightContent' => false,
+        'bodyClass' => ['loop1' => '', 'loop2' => ''],
+    ],
+    'footer' => true
+];
+$this->viewHook()->triggerEvt('layoutStruct', [
+    'layoutStruct' => $arrayStructs
+]);
+echo $this->doctype(\Laminas\View\Helper\Doctype::HTML5);
+?><html lang="<?php echo APPLICATION_LANGUAGE?>" xmlns="http://www.w3.org/1999/xhtml">
+<!--[if IE 9 ]><html lang="<?php echo APPLICATION_LANGUAGE?>" xmlns="http://www.w3.org/1999/xhtml" class="ie9"><![endif]-->
+<head>
+
+<?php
+$defaultPageTitle = $this->translate('株式会社新和[公式] | 熟成肉専門：エイジングビーフ、定食以上、割烹未満：釜元はん米衛　釜元たん米衛の運営');
+$title = $this->translate('株式会社新和[公式] | 熟成肉専門：エイジングビーフ、定食以上、割烹未満：釜元はん米衛　釜元たん米衛の運営');
+$this->headmeta()->setAutoEscape(false)->setCharset('UTF-8');
+$currentTitle = $this->headTitle()->setSeparator(' | ')->setAutoEscape(false)->renderTitle();
+if( strlen($currentTitle) == 0 ){
+    $title = $defaultPageTitle;
+}else{
+//    $title = $currentTitle . ' | ' . $title; 
+   $title = $currentTitle ; 
+}
+// Get current page title
+$pageTitle = $title;
+/*
+ $this->headmeta()
+    ->setHttpEquiv('Content-Type', 'text/html; charset=utf-8')
+    ->setHttpEquiv('X-UA-Compatible', 'IE=EDGE')
+    ->appendName('viewport', 'height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0, user-scalable=no')
+    ->appendName('copyright', 'Shinwa, Inc')
+    ->appendName('author', 'Shinwa, Inc')
+    ->appendName('description', $arrayStructs['headMeta']['description'])
+    ->appendName('keyword', $arrayStructs['headMeta']['keyword']);
+ */
+?>
+<meta charset="UTF-8" >
+<meta http-equiv="encoding" content="utf-8" >
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" >
+<meta http-equiv="Content-Language" content="<?php echo APPLICATION_LOCALE ?>" >
+<meta name="viewport" content="height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" >
+<meta name="copyright" content="Shinwa, Inc." >
+<meta name="author" content="Shinwa, Inc." >
+<meta name="description" content="<?php echo $arrayStructs['headMeta']['description'] ?>" >
+<meta name="keyword" content="<?php echo $arrayStructs['headMeta']['keyword'] ?>" >
+<title><?php echo $title; ?></title>
+<?php /* <link rel="manifest" href="<?php echo $urlDefault ?>/manifest.json"> */ ?>
+<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="<?php 
+    echo $urlDefault . $pubRes->files('index.ico?v=1', 'images', false)?>"/> 
+
+<!-- META FOR SNS -->
+<meta property="og:site_name" content="<?php echo $defaultPageTitle; ?>"/>
+<meta property="og:type" content="article" />
+<meta property="og:title" itemprop="headline" content="<?php echo $pageTitle?>"/>
+<meta property="og:description" itemprop="description" content="<?php echo $arrayStructs['headMeta']['description'] ?>"/>
+<meta property="og:url" itemprop="url" content="<?php echo $arrayStructs['headMeta']['url'] ?>"/>
+<meta property="og:image:type" content="image/<?php echo $arrayStructs['headMeta']['img']['type'] ?>" />
+<meta property="og:image" itemprop="thumbnailUrl" content="<?php echo $arrayStructs['headMeta']['img']['url'] ?>" />
+<meta property="og:image:secure_url" content="<?php echo $arrayStructs['headMeta']['img']['url'] ?>" />
+<meta property="og:image:width" content="<?php echo $arrayStructs['headMeta']['img']['width'] ?>"/>
+<meta property="og:image:height" content="<?php echo $arrayStructs['headMeta']['img']['height'] ?>"/>
+<meta property="fb:app_id" content="" />
+<meta name="twitter:card" value="summary">
+<meta name="twitter:site" content="@AgingBeef">
+<meta name="twitter:creator" content="@AgingBeef">
+<!-- END META FOR SNS -->
+
+<!-- iPad icons -->
+<link rel="apple-touch-icon-precomposed" href="<?php 
+echo $urlDefault . $pubRes->files('indextoplogo.png?v=1', 'images', false)
+?>" sizes="72x72">
+<link rel="apple-touch-icon-precomposed" href="<?php 
+echo $urlDefault . $pubRes->files('indextoplogo.png?v=1', 'images', false)
+?>" sizes="144x144">
+<!-- iPhone and iPod touch icons -->
+<link rel="apple-touch-icon-precomposed" href="<?php 
+echo $urlDefault . $pubRes->files('indextoplogo.png?v=1', 'images', false)
+?>" sizes="57x57">
+<link rel="apple-touch-icon-precomposed" href="<?php 
+echo $icon114 = $urlDefault . $pubRes->files('indextoplogo.png?v=1', 'images', false); 
+?>" sizes="114x114">
+<!-- Nokia Symbian -->
+<link rel="nokia-touch-icon" href="<?php 
+echo $urlDefault . $pubRes->files('indextoplogo.png?v=1', 'images', false) ?>">
+<!-- Android icon precomposed so it takes precedence -->
+<link rel="apple-touch-icon-precomposed" href="<?php 
+echo $icon114 ?>" sizes="1x1">
+
+<!-- Link styles -->
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:300,400,500,700,900&amp;subset=japanese" media="all" rel="stylesheet" type="text/css">
+<?php
+        
+        $headerContent = $this->headerSession($arrayStructs['header']);
+        $footer = $arrayStructs['footer'] ? $this->footerSession() : '';
+        $cstAsset = $this->lazyAsset()->getItems();
+        $banner = '';
+        $breadcrumb = '';
+        $rightContent= '';
+        if ( $arrayStructs['body']['rightContent'] ){
+            $rightContent = $this->bodyRightSession($arrayStructs['body']['rightContent']);
+        }
+        
+        if( $arrayStructs['body']['breadcrumb'] ){
+            $breadcrumb = $arrayStructs['body']['breadcrumb'];
+        }
+        
+        $isDebug = $_GET['not-minify'] ?? false;
+        $cssMinifyMethod = 'minifyHeadLink';
+        if ( $isDebug ) $cssMinifyMethod = 'headLink';
+        
+        $baseMeterialBower = 'meterial/vendors/bower_components/';
+        // -- custom css and jquery
+        $cssNo = 0; $jsNo = 0;
+        
+        $assetsItems = [
+            'css' => array_replace([
+               //($cssNo+=10) => 'https://fonts.googleapis.com/css?family=Noto+Sans+JP:300,400,500,700,900&amp;subset=japanese',
+               ($cssNo+=10) => $pubRes->files( 'aos/aos.css', 'js', false),
+               ($cssNo+=10) => $pubRes->files( 'bootstrap/css/bootstrap.min.css', 'lib', false),
+               ($cssNo+=10) => $pubRes->files( 'animate/animate.min.css', 'lib', false),
+               ($cssNo+=10) => $pubRes->files( 'meterial/sweetalert/sweet-alert.css', 'lib', false),
+               ($cssNo+=10) => $pubRes->files( 'style.css', 'css', false),
+               ($cssNo+=10) => $pubRes->files( 'front-awesome/4.7.0/css/font-awesome.min.css', 'css', false),
+            ], $cstAsset['css']),
+            'js' => array_replace([
+               ($jsNo+=10) => $pubRes->files( 'jquery/jquery.min.js', 'lib', false),
+               ($jsNo+=10) => $pubRes->files( 'jquery/jquery-migrate.min.js', 'lib', false),
+               ($jsNo+=10) => $pubRes->files( 'jquery/jquery.waypoints.min.js', 'lib', false),
+               ($jsNo+=10) => $pubRes->files( 'bootstrap/js/bootstrap.bundle.min.js', 'lib', false),
+               ($jsNo+=10) => $pubRes->files( 'easing/easing.min.js', 'lib', false),
+               ($jsNo+=10) => $pubRes->files( 'superfish/hoverIntent.js', 'lib', false),
+               ($jsNo+=10) => $pubRes->files( 'superfish/superfish.min.js', 'lib', false),
+               ($jsNo+=10) => $pubRes->files( 'jquery/jquery.bgswitcher.js', 'lib', false),
+               ($jsNo+=10) => $pubRes->files( 'jquery/jquery.sticky-kit.min.js', 'lib', false),
+               ($jsNo+=10) => $pubRes->files( 'meterial/sweetalert/sweet-alert.min.js', 'lib', false),
+               ($jsNo+=10) => $pubRes->files( 'meterial/bootstrap-growl/bootstrap-growl.min.js', 'lib', false),
+                ($jsNo+=10) => $pubRes->files( 'aos/aos.js', 'js', false),
+               ($jsNo+=10) => $pubRes->files( 'main.js', 'js', false),
+               ($jsNo+=10) => $pubRes->files( 'AjaxZip3/AjaxZip3.js', 'lib', false),
+            ], $cstAsset['js'])
+        ];
+        ksort($assetsItems['css']);
+        foreach ($assetsItems['css'] as $css)
+            $this ->{$cssMinifyMethod}() ->appendStylesheet($css, 'all');
+         echo $this->{$cssMinifyMethod}()->setAutoEscape(false) . "\n";
+        // -- Render custom css
+        echo $this->headStyle();
+        
+        // --- Only for upload version [release, test]
+        /* if( $this->zfAuthen()->user_id ){
+            $this->headScriptAction(null, [
+                '__yes__' => $this->translate('Yes'),
+                '__no__' => $this->translate('No')
+            ], [
+                'action' => 'client', 'controller' => 'index', 'module' => 'application'
+            ]);
+        } */
+
+        ?>
+        <!--[if IE 9 ]><script type="text/javascript">
+        	var classE = document.getElementsByTagName('html').className || '';
+        	document.getElementsByTagName('html').className = classE + ' ie9';
+        </script><![endif]-->
+
+    <?php
+    $gTagMngId = \Models\Utilities\User::getGoogleTagManagers(true);
+    if (!empty($gTagMngId)) : ?>
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer', '<?= $gTagMngId ?>');</script>
+    <?php endif; ?>
+
+    </head>
+    <body class="<?php echo empty($arrayStructs['header']['banner']) ? 'no-banner' : ''; ?>">
+        
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=
+        GTM-NONE"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+       
+       <?php
+       echo $this->partial('application/layout/no_javascript.phtml');
+       
+       //ob_start();
+       ?><!-- Header -->
+       <?php
+       if ( $headerContent ){
+           foreach ($headerContent as $content){
+               echo $content;
+           }
+       }
+       ?>
+        <main id="main">
+        	<?php echo $breadcrumb; ?>
+        	<!-- Content -->
+        	<div class="<?php echo $arrayStructs['body']['bodyClass']['loop1']; ?>">
+        		<div class="<?php echo $arrayStructs['body']['bodyClass']['loop2']; ?>">
+        			<?php echo $this->content; ?>
+        			<?php echo $rightContent?>
+        		</div>
+        	</div>
+    	</main>
+    	<!-- Footer content -->
+    	<?php 
+    	   echo $footer;
+            //require_once PUBLIC_PATH . '/min/lib/Minify/HTML.php';
+            //echo Minify_HTML::minify(ob_get_clean());
+        ?>
+        
+        <!-- Older IE warning message -->
+        <!--[if lt IE 9]>
+        <div class="ie-warning">
+            <h1 class="c-white">Warning!!</h1>
+            <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
+            <div class="iew-container">
+                <ul class="iew-download">
+                    <li>
+                        <a href="http://www.google.com/chrome/">
+                            <img src="<?php echo $pubRes->files('browsers/chrome.png', 'images')?>" alt="">
+                            <div>Chrome</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.mozilla.org/en-US/firefox/new/">
+                            <img src="<?php echo $pubRes->files('browsers/firefox.png', 'images')?>" alt="">
+                            <div>Firefox</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.opera.com">
+                            <img src="<?php echo $pubRes->files('browsers/opera.png', 'images')?>" alt="">
+                            <div>Opera</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.apple.com/safari/">
+                            <img src="<?php echo $pubRes->files('browsers/safari.png', 'images')?>" alt="">
+                            <div>Safari</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
+                            <img src="<?php echo $pubRes->files('browsers/ie.png', 'images')?>" alt="">
+                            <div>IE (New)</div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <p>Sorry for the inconvenience!</p>
+        </div>   
+    <![endif]-->
+    <div class="version <?= (APP_ENV_VERSON == 'vtest' ? '' : 'hidden') ?>" style="position:absolute;bottom:20px;right:20px;font-size:10px;font-style:italic;color: #eee;">
+    	<span><?= DISPLAY_VERSION ?? '' ?></span>
+    </div>
+    <script type="text/javascript">
+    	window.iLang="<?php echo APPLICATION_LANGUAGE?>";
+    	window.jsonSystemLanguage = <?php 
+    	   echo json_encode([
+    	       'cancel'=> $this->translate('Cancel'), 
+    	       'yes'=> $this->translate('Yes'), 
+    	       'system_info'=> $this->translate('Caution'),
+    	   ]);
+    	?>;
+    </script>    
+	<?php
+	
+    	// Add files JS.
+	    $jsMinifyMethod = 'minifyHeadScript';
+	    if ( $isDebug ) $jsMinifyMethod = 'headScript';
+	       ksort($assetsItems['js']);
+       
+       $assetsItems['js'] = array_reverse($assetsItems['js']);
+    	foreach ($assetsItems['js'] as $js)
+    	   $this ->{$jsMinifyMethod}()->prependFile($js);
+    	echo $this->{$jsMinifyMethod}()->setAutoEscape(false);
+    	
+    	if ($isDebug) echo $this->inlinescript ();
+	?>
+	
+	<!-- Placeholder for IE9 -->
+    <!--[if IE 9 ]>
+        <script src="<?php echo $pubRes->files( $baseMeterialBower . 'jquery-placeholder/jquery.placeholder.min.js', 'js', false)?>"></script>
+    <![endif]-->
+    <?php unset($pubRes, $layoutSections, $menuHeader);?>
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+    </body>
+</html>

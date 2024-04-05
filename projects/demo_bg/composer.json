@@ -1,0 +1,42 @@
+{
+	"name" : "mezzio/mezzio-skeleton",
+	"description" : "Laminas mezzio skeleton. Begin developing PSR-15 middleware applications in seconds!",
+	"type" : "project",
+	"license" : "BSD-3-Clause",
+	"keywords" : [
+		"background service"
+	],
+	"homepage" : "https://mezzio.dev",
+	"config" : {
+		"sort-packages" : true
+	},
+	"extra" : {
+		"laminas" : {
+			"component-whitelist" : [
+				"mezzio/mezzio",
+				"mezzio/mezzio-helpers",
+				"mezzio/mezzio-router",
+				"laminas/laminas-httphandlerrunner",
+				"mezzio/mezzio-fastroute",
+				"mezzio/mezzio-laminasviewrenderer"
+			]
+		}
+	},
+	"require" : {
+		"php" : "^8.0"
+	},
+	"require-dev" : {
+	},
+	"autoload" : {
+		"psr-4" : {
+			"Zf\\Ext\\" : "/var/www/projects/laminas_mvc/zf-ext/",
+			"GrootSwoole\\" : "/var/www/projects/laminas_swoole_php82/groot-swoole/",
+			"Models\\" : "../demo/app/Models/",
+			"Notify\\" : "app/Notify/"
+		},
+		"files" : [
+		]
+	},
+	"scripts" : {
+	}
+}

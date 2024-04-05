@@ -1,0 +1,553 @@
+@CHARSET "UTF-8";
+body{background-color: #fff}
+.cst-breadcrum, .breadcrumb{border: 0 none}
+.span-required{color: red}
+.clearfix{clear: both;}
+.clearfix.clear-line{height: 10px;width: 100%}
+.tt-highlight{color:#4caf50}
+.tt_fullname{font-size: 16px}
+.keyword-auto{min-width:100%}
+.tt-menu.tt-open{max-height: 350px;overflow:auto;right:0}
+.tt-empty-msg{padding: 10px; color:red}
+.tt-loading{padding: 10px;}
+.form-validation-error, .required{color:#f44336}
+.menu-left-group li{display: block; width: 100%}
+.switch label input[type=checkbox]:checked + .c-cyan {background-color: #2ad1a3;}
+.switch label input[type=checkbox]:checked + .c-cyan:after {background-color: #2ad1a3;}
+.switch label .c-cyan {
+  content: "";
+  display: inline-block;
+  position: relative;
+  width: 40px;
+  height: 15px;
+  background-color: rgba(66, 66, 66, 0.5);
+  border-radius: 15px;
+  margin-right: 10px;
+  transition: background 0.3s ease;
+  vertical-align: middle;
+  margin: 0 16px;
+  }
+.switch label .c-cyan:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  width: 21px;
+  height: 21px;
+  background-color: #4b515d;
+  border-radius: 21px;
+  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4);
+  left: -5px;
+  top: -3px;
+  transition: left 0.3s ease, background .3s ease, box-shadow 0.1s ease;
+}
+
+input[type=checkbox]:checked:not(:disabled) ~ .c-cyan:active:after {
+  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4), 0 0 0 15px rgba(170, 102, 204, 0.1); 
+}
+
+input[type=checkbox]:not(:disabled) ~ .c-cyan:active:after {
+  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4), 0 0 0 15px rgba(0, 0, 0, 0.08); 
+}
+
+.switch label input[type=checkbox]:checked + .c-cyan:after {left: 24px; }
+
+.switch input[type=checkbox][disabled] + .c-cyan {cursor: default; }
+
+.switch label input[type=checkbox][disabled] + .c-cyan:after,
+.switch label input[type=checkbox][disabled]:checked + .c-cyan:after {
+  background-color: #BDBDBD; }
+.bootstrap-datetimepicker-widget {
+  padding: 0 !important;
+  margin: 0 !important;
+  width: auto !important;
+}
+
+.bootstrap-datetimepicker-widget:after,
+.bootstrap-datetimepicker-widget:before {
+  display: none !important;
+}
+
+.bootstrap-datetimepicker-widget table td {
+  text-shadow: none;
+}
+
+.bootstrap-datetimepicker-widget table td span {
+  margin: 0;
+}
+
+.bootstrap-datetimepicker-widget table td span:hover {
+  background: transparent;
+}
+
+.bootstrap-datetimepicker-widget .glyphicon {
+  font-family: 'Material-Design-Iconic-Font';
+  font-size: 18px;
+}
+
+.bootstrap-datetimepicker-widget .glyphicon-chevron-left:before {
+  content: "\f2ff";
+}
+
+.bootstrap-datetimepicker-widget .glyphicon-chevron-right:before {
+  content: "\f301";
+}
+
+.bootstrap-datetimepicker-widget .glyphicon-time:before {
+  content: "\f337";
+}
+
+.bootstrap-datetimepicker-widget .glyphicon-calendar:before {
+  content: "\f32e";
+}
+
+.bootstrap-datetimepicker-widget .glyphicon-chevron-up:before {
+  content: "\f1e5";
+}
+
+.bootstrap-datetimepicker-widget .glyphicon-chevron-down:before {
+  content: "\f1e4";
+}
+
+.bootstrap-datetimepicker-widget [data-action="togglePicker"] span {
+  font-size: 25px;
+  color: #ccc;
+}
+
+.bootstrap-datetimepicker-widget [data-action="togglePicker"] span:hover {
+  color: #333;
+}
+
+.bootstrap-datetimepicker-widget a[data-action] {
+  color: #009688;
+}
+
+.timepicker-picker .btn {
+  box-shadow: none !important;
+}
+
+.timepicker-picker table tbody tr + tr:not(:last-child) {
+  background: #009688;
+  color: #fff;
+}
+
+.timepicker-picker table tbody tr + tr:not(:last-child) td {
+  border-radius: 0;
+}
+
+.timepicker-picker .btn,
+.timepicker-picker .btn:hover {
+  background: #fff;
+  color: #333;
+}
+
+.datepicker.top {
+  -webkit-transform-origin: 0 100% !important;
+  -moz-transform-origin: 0 100% !important;
+  -ms-transform-origin: 0 100% !important;
+  transform-origin: 0 100% !important;
+}
+
+.datepicker table thead tr th {
+  border-radius: 0;
+  color: #fff;
+}
+
+.datepicker table thead tr th .glyphicon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  line-height: 30px;
+  font-size: 22px;
+  display:inline-block;
+}
+
+.datepicker table thead tr th:hover .glyphicon {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.datepicker table thead tr:first-child th {
+  background: #009688;
+  padding: 20px 0;
+}
+
+.datepicker table thead tr:first-child th:hover {
+  background: #009688;
+}
+
+.datepicker table thead tr:first-child th.picker-switch {
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.datepicker table thead tr:last-child th {
+  text-transform: uppercase;
+  font-weight: normal;
+  font-size: 11px;
+}
+
+.datepicker table thead tr:last-child th:first-child {
+  padding-left: 20px;
+}
+
+.datepicker table thead tr:last-child th:last-child {
+  padding-right: 20px;
+}
+
+.datepicker table thead tr:last-child:not(:only-child) {
+  background: #00877a;
+}
+
+.datepicker table tbody tr td:first-child {
+  padding-left: 13px;
+}
+
+.datepicker table tbody tr td:last-child {
+  padding-right: 13px;
+}
+
+.datepicker table td.day {
+  width: 35px;
+  height: 35px;
+  line-height: 20px;
+  color: #333;
+  position: relative;
+  padding: 0;
+  background: transparent;
+}
+
+.datepicker table td.day:hover {
+  background: none;
+}
+
+.datepicker table td.day:before {
+  content: "";
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin-bottom: -33px;
+  display: inline-block;
+  background: transparent;
+  position: absolute;
+  text-shadow: none;
+  top: 0;
+  left: calc((100% - 35px) / 2);
+  z-index: -1;
+}
+.datepicker table tbody tr td:last-child:before {
+    left: calc((100% - 50px) / 2);
+}
+.datepicker table tbody tr td:first-child:before {
+    left: calc((100% - 20px) / 2);
+}
+.datepicker table td.day.old,
+.datepicker table td.day.new {
+  color: #CDCDCD;
+}
+
+.datepicker table td:not(.today):not(.active):hover:before {
+  background: #F0F0F0;
+}
+
+.datepicker table td.today {
+  color: #333;
+}
+
+.datepicker table td.today:before {
+  background-color: #E2E2E2;
+}
+
+.datepicker table td.active {
+  color: #fff;
+}
+#main .datepicker table td.active {
+  z-index:1
+} 
+.datepicker table td.active:before {
+  background-color: #009688;
+}
+.bootstrap-datetimepicker-widget table td.active.today:before{
+	border-bottom-color: #ddd
+}
+.datepicker-months .month,
+.datepicker-years .year,
+.timepicker-minutes .minute,
+.timepicker-hours .hour {
+  border-radius: 50%;
+}
+
+.datepicker-months .month:not(.active):hover,
+.datepicker-years .year:not(.active):hover,
+.timepicker-minutes .minute:not(.active):hover,
+.timepicker-hours .hour:not(.active):hover {
+  background: #F0F0F0;
+}
+
+.datepicker-months .month.active,
+.datepicker-years .year.active,
+.timepicker-minutes .minute.active,
+.timepicker-hours .hour.active {
+  background: #009688;
+}
+
+.timepicker-minutes .minute,
+.timepicker-hours .hour {
+  padding: 0;
+}
+.btn-file {
+  overflow: hidden;
+  position: relative;
+  vertical-align: middle;
+}
+
+.btn-file > input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  font-size: 23px;
+  height: 100%;
+  width: 100%;
+  direction: ltr;
+  cursor: pointer;
+}
+
+.fileinput {
+  text-align: center;width: 100%;
+  display: inline-block;
+}
+
+.fileinput .form-control {
+  padding-top: 7px;
+  padding-bottom: 5px;
+  display: inline-block;
+  margin-bottom: 0px;
+  vertical-align: middle;
+  cursor: text;
+}
+
+.fileinput .thumbnail {
+  overflow: hidden;
+  display: inline-block;
+  margin-bottom: 5px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.fileinput .thumbnail > img {
+  max-height: 100%;
+}
+
+.fileinput .btn {
+  vertical-align: middle;
+}
+
+.fileinput-exists .fileinput-new,
+.fileinput-new .fileinput-exists {
+  display: none;
+}
+
+.fileinput-inline .fileinput-controls {
+  display: inline;
+}
+
+.fileinput-filename {
+  vertical-align: middle;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.form-control .fileinput-filename {
+  vertical-align: bottom;
+}
+
+.fileinput.input-group {
+  display: table;
+}
+
+.fileinput.input-group > * {
+  position: relative;
+  z-index: 2;
+}
+
+.fileinput.input-group > .btn-file {
+  z-index: 1;
+}
+
+.fileinput-new.input-group .btn-file,
+.fileinput-new .input-group .btn-file {
+  border-radius: 0 2px 2px 0;
+}
+
+.fileinput-new.input-group .btn-file.btn-xs,
+.fileinput-new .input-group .btn-file.btn-xs,
+.fileinput-new.input-group .btn-file.btn-sm,
+.fileinput-new .input-group .btn-file.btn-sm {
+  border-radius: 0 2px 2px 0;
+}
+
+.fileinput-new.input-group .btn-file.btn-lg,
+.fileinput-new .input-group .btn-file.btn-lg {
+  border-radius: 0 2px 2px 0;
+}
+
+.form-group.has-warning .fileinput .fileinput-preview {
+  color: #ffa829;
+}
+
+.form-group.has-warning .fileinput .thumbnail {
+  border-color: #ff760f;
+}
+
+.form-group.has-error .fileinput .fileinput-preview {
+  color: #f6675d;
+}
+
+.form-group.has-error .fileinput .thumbnail {
+  border-color: #f54556;
+}
+
+.form-group.has-success .fileinput .fileinput-preview {
+  color: #67bd6a;
+}
+
+.form-group.has-success .fileinput .thumbnail {
+  border-color: #61b555;
+}
+
+.input-group-addon:not(:first-child) {
+  border-left: 0;
+}
+.fileinput {
+  position: relative;
+  padding-right: 35px;
+}
+
+.fileinput .close {
+  position: absolute;
+  top: 5px;
+  font-size: 12px;
+  float: none;
+  opacity: 1;
+  font-weight: 500;
+  border: 1px solid #ccc;
+  width: 19px;
+  text-align: center;
+  height: 19px;
+  line-height: 15px;
+  border-radius: 50%;
+  right: 0;
+}
+
+.fileinput .close:hover {
+  background: #eee;
+}
+
+.fileinput .input-group-addon {
+  padding: 0 10px;
+  vertical-align: middle;
+}
+
+.fileinput .fileinput-preview {
+  width: 200px;
+  height: 150px;
+  position: relative;
+}
+
+.fileinput .fileinput-preview img {
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: -13px;
+}
+
+.fileinput .fileinput-preview:after {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+}
+.fileinput-preview.thumbnail{border:1px solid #ddd}
+.form-group{position: relative;}
+.bootstrap-datetimepicker-widget{z-index: 1000}
+.growl-animated .close{font-size: 100%; margin-left: 5px; color: #fff}
+.sa-button-container .btn{cursor: pointer;}
+.hidden{display: none;visibility: hidden;}
+#main-menu-wrapp{margin-top: 90px}
+.btn.black-text{color:black !important}
+.page-link {color:#292b2c}
+.sub-menu li.active a {
+    font-weight: bold;
+    color: #8BC34A;
+}
+.ie-warning {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  background: #000000;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  color: #fff;
+  font-family: "Courier New", Courier, monospace;
+  padding: 50px 0;
+}
+
+.ie-warning p {
+  font-size: 17px;
+}
+
+.ie-warning .iew-container {
+  min-width: 1024px;
+  width: 100%;
+  height: 200px;
+  background: #fff;
+  margin: 50px 0;
+}
+
+.ie-warning .iew-download {
+  list-style: none;
+  padding: 30px 0;
+  margin: 0 auto;
+  width: 720px;
+}
+
+.ie-warning .iew-download > li {
+  float: left;
+  vertical-align: top;
+}
+
+.ie-warning .iew-download > li > a {
+  display: block;
+  color: #000;
+  width: 140px;
+  font-size: 15px;
+  padding: 15px 0;
+}
+
+.ie-warning .iew-download > li > a > div {
+  margin-top: 10px;
+}
+
+.ie-warning .iew-download > li > a:hover {
+  background-color: #eee;
+}
+/*--------Date picker------------*/
+.bootstrap-datetimepicker-widget.dropdown-menu{display:block}
+.timepicker-picker a[data-action].btn span{color:#2BBBAD;cursor: pointer;}
+.timepicker-picker tr td button.btn{color:#2BBBAD !important;cursor: pointer;}
+.timepicker-picker tr td button.btn:hover{color:#fff !important;}
+/*-------- End datepicker----------*/
+.sweet-alert .la-ball-fall{z-index:1}
+.sweet-alert .sa-icon{margin: 30px auto !important}
+input.input-alternate{max-width: calc(100% - 30px);}
+@media(min-width:992px){
+	#left-content{width: 290px}
+}
+@media(max-width:991px){
+	#left-content{width: 100%}	
+}
+.sw-toggled #header {
+  z-index: 999;
+}

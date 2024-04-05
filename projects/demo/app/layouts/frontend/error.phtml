@@ -1,0 +1,255 @@
+<?php 
+$pubRes = $this->zfResource();$cstAsset = $this->lazyAsset()->getItems();
+$urlDefault = $this->serverurl();
+$arrayStructs = [
+    'headMeta'=> [
+        'description' => $this->translate('熟成肉専門：エイジングビーフ、定食以上、割烹未満：釜元はん米衛　釜元たん米衛を運営しております。'),
+        'keyword'     => '熟成肉専門, 定食, 割烹, 焼肉',
+        'url'         => $urlDefault,
+        'img'         => [
+            'url'   => $urlDefault . $pubRes->files('top00-1_agingbeef.jpg', 'images', false),
+            'width' => 1024,
+            'height'=> 800,
+            'type'  => 'png'
+        ]
+        
+    ]
+];
+$this->viewHook()->triggerEvt('layoutStruct', [
+    'layoutStruct' => $arrayStructs
+]);
+
+echo $this->doctype('HTML5');
+?><html lang="<?php echo APPLICATION_LANGUAGE?>">
+    <head>
+        <meta charset="utf-8">
+        <?php 
+        // Set title.
+        $defaultPageTitle = $this->translate('404 ページが存在しません | 株式会社新和');
+        $title = $this->translate('404 ページが存在しません | 株式会社新和');
+        $this->headmeta()->setAutoEscape(false)->setCharset('UTF-8');
+        $currentTitle = $this->headTitle()->setSeparator(' | ')->setAutoEscape(false)->renderTitle();
+        if( strlen($currentTitle) == 0 ){
+            $title = $defaultPageTitle;
+        }else{
+            $title = $currentTitle . ' | ' . $title;
+        }
+        // Get current page title
+        $pageTitle = $title;
+        
+       /*  echo $this->headmeta()
+        ->setHttpEquiv('Content-Type', 'text/html; charset=utf-8')
+        ->setHttpEquiv('X-UA-Compatible', 'IE=EDGE')
+        ->appendName('viewport', 'height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0, user-scalable=no')
+        ->appendName('copyright', 'Shinwa, Inc')
+        ->appendName('author', 'Shinwa, Inc')
+        ->appendName('description', $arrayStructs['headMeta']['description'])
+        ->appendName('keyword', $arrayStructs['headMeta']['keyword']) */;
+            
+        ?>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+        <meta http-equiv="Content-Language" content="<?php echo APPLICATION_LOCALE ?>">
+        <meta name="viewport" content="height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+        <meta name="copyright" content="Shinwa, Inc.">
+        <meta name="author" content="Shinwa, Inc.">
+        <meta name="description" content="<?php echo $arrayStructs['headMeta']['description'] ?>">
+        <meta name="keyword" content="<?php echo $arrayStructs['headMeta']['keyword'] ?>">
+        <title><?php echo $title; ?></title>
+        <link rel="manifest" href="<?php echo $urlDefault ?>/manifest.json">
+        <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="<?php 
+        echo $urlDefault . $pubRes->files('index.ico?v=1', 'images', false)?>"/>
+        <!-- META FOR FACEBOOK -->
+        <meta property="fb:app_id" content="2144330185889347" />
+        <meta property="og:site_name" content="<?php echo $defaultPageTitle?>" />
+        <meta property="og:title" itemprop="headline" content="<?php echo $defaultPageTitle?>"/>
+        <meta property="og:description" itemprop="description" content="<?php echo $arrayStructs['headMeta']['description'] ?>"/>
+        <meta property="og:url" itemprop="url" content="<?php echo $arrayStructs['headMeta']['url'] ?>"/>
+        <meta property="og:image" itemprop="thumbnailUrl" content="<?php echo $arrayStructs['headMeta']['img']['url'] ?>" />
+        <meta property="og:image:type" content="image/<?php echo $arrayStructs['headMeta']['img']['type'] ?>" />
+        <meta property="og:image:secure_url" content="<?php echo $arrayStructs['headMeta']['img']['url'] ?>" />
+        <meta property="og:image:width" content="<?php echo $arrayStructs['headMeta']['img']['width'] ?>"/>
+        <meta property="og:image:height" content="<?php echo $arrayStructs['headMeta']['img']['height'] ?>"/>
+        <meta property="fb:app_id" content="" />
+        <meta name="twitter:card" value="summary">
+        <meta name="twitter:site" content="@AgingBeef">
+        <meta name="twitter:creator" content="@AgingBeef">
+        <!-- iPad icons -->
+        <link rel="apple-touch-icon-precomposed" href="<?php 
+        echo $urlDefault . $pubRes->files('icon72.png?v=1', 'images', false)
+        ?>" sizes="72x72">
+        <link rel="apple-touch-icon-precomposed" href="<?php 
+        echo $urlDefault . $pubRes->files('icon144.png?v=1', 'images', false)
+        ?>" sizes="144x144">
+        <!-- iPhone and iPod touch icons -->
+        <link rel="apple-touch-icon-precomposed" href="<?php 
+        echo $urlDefault . $pubRes->files('icon57.png?v=1', 'images', false)
+        ?>" sizes="57x57">
+        <link rel="apple-touch-icon-precomposed" href="<?php 
+        echo $icon114 = $urlDefault . $pubRes->files('icon114.png?v=1', 'images', false); 
+        ?>" sizes="114x114">
+        <!-- Nokia Symbian -->
+        <link rel="nokia-touch-icon" href="<?php 
+        echo $urlDefault . $pubRes->files('icon57.png?v=1', 'images', false) ?>">
+        <!-- Android icon precomposed so it takes precedence -->
+        <link rel="apple-touch-icon-precomposed" href="<?php 
+        echo $icon114 ?>" sizes="1x1">
+        
+        <!-- Le styles -->
+        <?php
+        $isDebug = $_GET['is-not-minify'];
+        $cssMinifyMethod = 'minifyHeadLink';
+        if ( $isDebug ) $cssMinifyMethod = 'headLink';
+        
+        $baseMeterialBower = 'meterial/vendors/bower_components/';
+        // -- custom css and jquery
+        $cssNo = 0; $jsNo = 0;
+        $pubRes = $this->zfResource();$cstAsset = $this->lazyAsset()->getItems();
+        $assetsItems = [
+            'css' => [
+//               0 => $pubRes->files('reset.css', 'css', false),
+//               ($cssNo+=10) => $pubRes->files( 'meterial/animate.min.css', 'js', false),
+//               ($cssNo+=10) => $pubRes->files( 'meterial/waves/waves.min.css', 'js', false),
+//               ($cssNo+=10) => $pubRes->files( 'app.min.1.css', 'css', false),
+//               ($cssNo+=10) => $pubRes->files( 'app.min.2.css', 'css', false),
+//               ($cssNo+=10) => $pubRes->files( 'style.css', 'css', false)
+            ] + $cstAsset['css'],
+           'js' => [
+//               ($jsNo+=10) => $pubRes->files( $baseMeterialBower . 'jquery/dist/jquery.min.js', 'js', false),
+//               ($jsNo+=10) => $pubRes->files( $baseMeterialBower . 'bootstrap/dist/js/bootstrap.min.js', 'js', false),
+//               ($jsNo+=10) => $pubRes->files(  'meterial/waves/waves.min.js', 'js', false),
+//               100 => $pubRes->files( 'admin.js', 'js', false),
+//               101 => $pubRes->files( 'functions.js', 'js', false)
+            ]+ $cstAsset['js']
+        ];
+        
+        foreach ($assetsItems['css'] as $css)
+            $this ->{$cssMinifyMethod}() ->appendStylesheet($css, 'all');
+        echo $this ->{$cssMinifyMethod}() . "\n";
+        
+        // -- Render custom css
+        echo $this->headStyle();
+        ?>
+        <!--[if IE 9 ]><script type="text/javascript">
+        	var classE = document.getElementsByTagName('html').className || '';
+        	document.getElementsByTagName('html').className = classE + ' ie9';
+        </script><![endif]-->
+
+    </head>
+    <body>
+	   <!-- Content -->  
+       <div id="main" data-layout="layout-1">
+           <div id="content">
+                <div class="container">
+                    
+    	            <div class="card">
+    	               <?php echo $this->content; ?>
+    	            </div>
+    	            
+    	        </div>
+    	   </div>
+    	</div>
+    	
+        <!-- Older IE warning message -->
+        <!--[if lt IE 9]>
+            <div class="ie-warning">
+                <h1 class="c-white">Warning!!</h1>
+                <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
+                <div class="iew-container">
+                    <ul class="iew-download">
+                        <li>
+                            <a href="http://www.google.com/chrome/">
+                                <img src="<?php echo $pubRes->files('browsers/chrome.png', 'images')?>" alt="">
+                                <div>Chrome</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.mozilla.org/en-US/firefox/new/">
+                                <img src="<?php echo $pubRes->files('browsers/firefox.png', 'images')?>" alt="">
+                                <div>Firefox</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://www.opera.com">
+                                <img src="<?php echo $pubRes->files('browsers/opera.png', 'images')?>" alt="">
+                                <div>Opera</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.apple.com/safari/">
+                                <img src="<?php echo $pubRes->files('browsers/safari.png', 'images')?>" alt="">
+                                <div>Safari</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
+                                <img src="<?php echo $pubRes->files('browsers/ie.png', 'images')?>" alt="">
+                                <div>IE (New)</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <p>Sorry for the inconvenience!</p>
+            </div>   
+        <![endif]-->
+    <script type="text/javascript">window.iLang="<?php echo $this->iLanguage?>";</script>    
+	<?php
+    	// Add files JS.
+	    $jsMinifyMethod = 'minifyHeadScript';
+	    if ( $isDebug ) $jsMinifyMethod = 'headScript';
+	    ksort($assetsItems['js']);
+	    $assetsItems['js'] = array_reverse($assetsItems['js']);
+    	foreach ($assetsItems['js'] as $js)
+    	   $this ->{$jsMinifyMethod}()->prependFile($js);
+    	echo $this ->{$jsMinifyMethod}();
+	?>
+	<?php 
+	    $flashMessenger = $this->flashMessenger();
+        // Get messages from Zend_Action_Helper_FlashMessenger.
+		$flashMessengers = array_filter([
+		    'info' => array_merge(
+		        $flashMessenger->getCurrentInfoMessages(),
+		        $flashMessenger->getInfoMessages()
+	        ),
+		    'success' => array_merge(
+		        $flashMessenger->getCurrentSuccessMessages(),
+		        $flashMessenger->getSuccessMessages()
+	        ),
+		    'warning' => array_merge(
+		        $flashMessenger->getCurrentWarningMessages(),
+		        $flashMessenger->getWarningMessages()
+	        ),
+		    'error' => array_merge(
+		        $flashMessenger->getCurrentErrorMessages(),
+		        $flashMessenger->getErrorMessages()
+	        )
+		]);
+		// Clear message
+		$flashMessenger->clearCurrentMessagesFromContainer();
+	?>
+	<?php if ( count($flashMessengers) > 0 ):?>
+	<script type="text/javascript">
+		var colorsMsgs = {
+			'error' 	: 'bg-error',
+			'info'  	: 'bg-info',
+			'warning' 	: 'bg-warning',
+			'success'	: 'bg-success'
+		}, msgs = <?php echo json_encode($flashMessengers); ?>;
+		$(window).load(function(){
+			var keys = Object.keys(msgs);
+			keys.forEach(function(key){
+				msgs[key].forEach(function(msg){
+					notifyMe(msg, 'inverse', colorsMsgs[key]);
+				});
+			});
+		});
+	</script>
+	<?php endif;?>
+	<!-- Placeholder for IE9 -->
+    <!--[if IE 9 ]>
+        <script src="<?php echo $pubRes->files( $baseMeterialBower . 'jquery-placeholder/jquery.placeholder.min.js', 'js', false)?>"></script>
+    <![endif]-->
+    <?php unset($pubRes, $layoutSections);?>
+    </body>
+</html>
