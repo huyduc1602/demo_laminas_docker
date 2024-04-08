@@ -11,6 +11,10 @@ class ComposerStaticInitbdf0a400473c525357c5399ef5fee327
         array (
             'Zf\\Ext\\' => 7,
         ),
+        'U' => 
+        array (
+            'UploadFile\\' => 11,
+        ),
         'N' => 
         array (
             'Notify\\' => 7,
@@ -29,6 +33,10 @@ class ComposerStaticInitbdf0a400473c525357c5399ef5fee327
         'Zf\\Ext\\' => 
         array (
             0 => __DIR__ . '/../..' . '/../../../php_lib/laminas_mvc/zf-ext',
+        ),
+        'UploadFile\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/app/UploadFile',
         ),
         'Notify\\' => 
         array (

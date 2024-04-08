@@ -32,7 +32,8 @@
 			"Zf\\Ext\\" : "/var/www/projects/laminas_mvc/zf-ext/",
 			"GrootSwoole\\" : "/var/www/projects/laminas_swoole_php82/groot-swoole/",
 			"Models\\" : "../demo/app/Models/",
-			"Notify\\" : "app/Notify/"
+			"Notify\\" : "app/Notify/",
+			"UploadFile\\" : "app/UploadFile/"
 		},
 		"files" : [
 		]

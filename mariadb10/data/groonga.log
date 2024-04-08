@@ -38,3 +38,7 @@
 2024-04-04 10:19:40.368366|n|f431d640|spec:259:update:mroonga_operations.record:64(column:fix_size):9(UInt32)
 2024-04-05 08:58:57.443421|n|45f0e880|mroonga 7.07 started.
 2024-04-05 08:58:57.443917|n|45f0e880|log level is 'NOTICE'
+2024-04-05 16:38:50.894647|n|d9cd2880|mroonga 7.07 started.
+2024-04-05 16:38:50.895113|n|d9cd2880|log level is 'NOTICE'
+2024-04-08 09:20:55.206120|n|669b5880|mroonga 7.07 started.
+2024-04-08 09:20:55.206510|n|669b5880|log level is 'NOTICE'

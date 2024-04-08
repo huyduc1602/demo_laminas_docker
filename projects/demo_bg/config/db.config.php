@@ -8,7 +8,7 @@ return [
         'user'    => 'root',
         'port'    => 3306,
         'password'=> 'root',
-        'dbname'  => 'db_name'
+        'dbname'  => 'db_demo'
     ],
     'v2' => $acc,
     'vtest' => $acc,

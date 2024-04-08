@@ -18,6 +18,7 @@ services:
       - "./supervisor:/etc/supervisor/conf.d/"
       - "./projects:/var/www/projects/"
       - "./data/certs/:/etc/ssl"
+      - "./php/php.ini:/usr/local/etc/php/php.ini"
       
     environment:
       - VIRTUAL_HOST=*.laminas.local,laminas.local,*.demo.local,demo.local
